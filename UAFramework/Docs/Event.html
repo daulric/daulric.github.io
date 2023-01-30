@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event.md</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="this-is-the-event-class-documentation-from-the-uaframework"><strong>This is the Event Class Documentation from the UAFramework</strong></h1>
+<h2 id="call-the-event-class-from-the-uaframework">Call the Event Class from the UAFramework</h2>
+<pre class=" language-lua"><code class="prism  language-lua"><span class="token keyword">local</span> UAFramework <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span>to<span class="token punctuation">.</span>module<span class="token punctuation">)</span>
+<span class="token keyword">local</span> Event <span class="token operator">=</span> UAFramework<span class="token punctuation">.</span>Event <span class="token comment">-- this gets the event module from the package</span>
+</code></pre>
+<h3 id="code-will-call-when-even-is-fired">Code will call when even is fired</h3>
+<pre class=" language-lua"><code class="prism  language-lua"><span class="token keyword">local</span> Connection <span class="token operator">=</span> Event<span class="token punctuation">:</span><span class="token function">ListenForEvent</span><span class="token punctuation">(</span><span class="token string">"id here"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token comment">-- paramaters here</span>
+<span class="token comment">-- this is where the</span>
+
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Value:"</span><span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> value <span class="token comment">-- returns if remote or bindable function is called</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span><span class="token comment">-- this returns the status of the event</span>
+</code></pre>
+<h3 id="this-stops-all-event-used-in-this-module">This stops all event used in this module</h3>
+<pre class=" language-lua"><code class="prism  language-lua">Event<span class="token punctuation">:</span><span class="token function">DisconnectAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h4 id="other-things-we-can-do-with-the-event"><strong>Other things we can do with the event!</strong></h4>
+<pre class=" language-lua"><code class="prism  language-lua">Connection<span class="token punctuation">.</span><span class="token function">Execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+</code></pre>
+<p>This execute the code without the firing the remote/bindable event or function.</p>
+<pre><code>Connection:Stop()
+</code></pre>
+<p>This disconnects the event</p>
+<pre><code>Connection:GetStatus()
+</code></pre>
+<p>This returns the status of the event</p>
+<h1 id="methods-to-send-data-from-client-to-server"><strong>Methods to Send Data From Client to Server</strong></h1>
+<pre class=" language-lua"><code class="prism  language-lua">Event<span class="token punctuation">:</span><span class="token function">SendServer</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token punctuation">...</span><span class="token punctuation">)</span>
+</code></pre>
+<p>This sends data to the server</p>
+<pre class=" language-lua"><code class="prism  language-lua">Event<span class="token punctuation">:</span><span class="token function">GetServer</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token punctuation">...</span><span class="token punctuation">)</span>
+</code></pre>
+<p>This sends and returns data from the server</p>
+<h1 id="methods-to-send-data-from-server-to-client"><strong>Methods to Send Data From Server To Client</strong></h1>
+<pre class=" language-lua"><code class="prism  language-lua">Event<span class="token punctuation">:</span><span class="token function">SendClient</span><span class="token punctuation">(</span>player<span class="token punctuation">,</span> id<span class="token punctuation">,</span> <span class="token punctuation">...</span><span class="token punctuation">)</span>
+</code></pre>
+<p>This sends data from the server to a specific client</p>
+<pre class=" language-lua"><code class="prism  language-lua">Event<span class="token punctuation">:</span><span class="token function">SendAllClients</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token punctuation">...</span><span class="token punctuation">)</span>
+</code></pre>
+<p>This sends data to all clients in the server</p>
+<pre class=" language-lua"><code class="prism  language-lua">Event<span class="token punctuation">:</span><span class="token function">GetClient</span><span class="token punctuation">(</span>player<span class="token punctuation">,</span> id<span class="token punctuation">,</span> <span class="token punctuation">...</span><span class="token punctuation">)</span>
+</code></pre>
+<p>This sends and returns data from the client</p>
+<h1 id="methods-to-send-data-either-from-server-to-server-or-client-to-client"><strong>Methods to Send Data Either From Server To Server or Client To Client</strong></h1>
+<pre class=" language-lua"><code class="prism  language-lua">Event<span class="token punctuation">:</span><span class="token function">FireDataToCom</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token punctuation">...</span><span class="token punctuation">)</span>
+</code></pre>
+<p>This sends data to another server or client</p>
+<pre class=" language-lua"><code class="prism  language-lua">Event<span class="token punctuation">:</span><span class="token function">GetDataFromCom</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token punctuation">...</span><span class="token punctuation">)</span>
+</code></pre>
+<p>This send and returns data from another server or client</p>
+</div>
+</body>
+
+</html>
