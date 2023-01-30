@@ -65,7 +65,6 @@ ManageProfiles:ResetProfile(player)
 ```
 
 ### We are done with the player profile
-#
 
 # Managing Profile Changed Signal
 ``` lua
@@ -74,7 +73,7 @@ ManageProfiles:GetChangedSignal(Type):Connect(function(player, data)
 end)
 ```
 This detects if anything has changed with the data
-#
+
 # Creating Templates
 ``` lua
 ManageProfiles.CreateTemplate {
@@ -85,15 +84,11 @@ ManageProfiles.CreateTemplate {
 ```
 This creates template that specific datastore.
 
-#
-
 # Reading Templates
 ``` lua
 ManageProfiles:ReturnExsistingTemplates()
 ```
-This returns all the templates created 
-
-#
+This returns all the templates created
 
 # Reading Profiles
 ``` lua
