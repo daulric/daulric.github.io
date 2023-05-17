@@ -2,6 +2,8 @@ site_name: daulric
 repo_url: https://github.com/daulric
 repo_name: daulric
 
+copyright: Copyright &copy; 2023 - Present daulric
+
 markdown_extensions:
   - def_list
   - footnotes
@@ -12,6 +14,11 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - admonition
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
