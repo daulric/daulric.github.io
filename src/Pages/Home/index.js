@@ -9,11 +9,6 @@ const listName = 'list-component'
 function Home() {
     return (
         <Fragment>
-            <center>
-                <br/>
-                <img className='git-pfp' src='https://github.com/daulric.png' alt='daulric/github'/>
-            </center>
-
             <h1 className='home-h-tag'>Hello There</h1>
             <p className='home-p-tag'>
                 My Name is <code className='code-tag'>Ulric</code>
@@ -54,10 +49,7 @@ function Home() {
                     </div>
                 </center>
             </div>
-            
-            
-            
-            
+
         </Fragment>
     )
 }
