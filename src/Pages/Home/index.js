@@ -1,57 +1,73 @@
-import { Fragment } from 'react';
+import React from 'react';
 import './index.css'
 import '../../Apis/scrollbar.css'
 
 import Card from '../../Apis/card/index'
 
-const listName = 'list-component'
+class MyHomePage extends React.Component {
 
-function Home() {
-    return (
-        <Fragment>
-            <h1 className='home-h-tag'>Hello There</h1>
-            <p className='home-p-tag'>
-                My Name is <code className='code-tag'>Ulric</code>
-            </p>
+    constructor(props) {
+        super(props)
+        console.log(props)
+    }
 
-            <p className='home-p-tag-2'>
-                I am currently a student at TA Marryshow Community College (TAMCC)
-                <br/>
-                and i'm currently studying Information Technology (easy course btw)
-                <br/><br/>
-                I like to do lots of stuff like:
-            </p>
+    render() {
+        return [
+            React.createElement("h1", {
+                className: "home-h-tag",
+                key: "home-h-tag",
 
-            <center>
-                <ul>
-                    <li className={listName}>Programming</li>
-                    <li className={listName}>Gaming</li>
-                    <li className={listName}>Doing Stupid Shit</li>
-                </ul>
-            </center>
-            <br />
-            <div id='profile'>
-                <center>
-                    <div className='cards'>
+            }, "Hello There"),
 
-                        <h1 className='profile-text'>Contact</h1>
-                        <br/>
+            React.createElement("p", {
+                className: "home-p-tag"
+            }, "My Name is ", [
+                React.createElement("code", {
+                    className: "code-tag"
+                }, "Ulric")
+            ]),
 
-                        <Card
-                            name='Github'
-                            info='This is where I host and store all my code for projects.'
-                            co={{
-                                name: 'Contact',
-                                link: 'https://github.com/daulric'
-                            }}
-                            img={'https://github.com/daulric.png'}
-                        />
-                    </div>
-                </center>
-            </div>
+            React.createElement("p", {
+                className: "home-p-tag-2",
+            }, [
+                "I am currently a student at TA Marryshow Community College (TAMCC)",
+                React.createElement("br"), 
+                "and I currently studying Information Technology",
 
-        </Fragment>
-    )
+            ]),
+            
+            (<br />),
+            React.createElement("div", {
+                id: "profile",  
+            }, [
+                React.createElement("center",{}, [
+                    React.createElement("h1", {
+                        className: "profile-text",
+                    }, "Contact"),
+                    
+                    (<br/>),
+
+                    React.createElement("div", {
+                        className: "cards",
+                    }, [
+
+                        React.createElement(Card, {
+                            name: "Github",
+                            info: "This is where I host and store all my code for projects",
+                            img: "https://github.com/daulric.png",
+                            co: {
+                                name: "Check Me Out",
+                                link: "https://github.com/daulric"
+                            }
+                        }),
+
+
+                    ])
+                ])
+            ])
+
+        ]
+    }
 }
 
-export default Home;
+export default MyHomePage;
