@@ -1,6 +1,5 @@
 import React from "react"
 import Image from "next/image"
-import Link from "next/link"
 
 function LinkCard(props) {
     return (
@@ -25,7 +24,6 @@ function LinkCard(props) {
 }
 
 export default function AboutMe(){
-
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -65,6 +63,12 @@ export default function AboutMe(){
                     link="https://instagram.com/ulricaird"
                     text="Instagram"
                     info="Get up to date with posts!"
+                />
+
+                <LinkCard 
+                    text="Send Email"
+                    link="/email"
+                    info="Send a Personal Message"
                 />
             </div>
         </main>
