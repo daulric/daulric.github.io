@@ -29,21 +29,19 @@ export default async function EmailSuccess(props){
         console.log(e)
     }
 
-    let email = params.email
     let name = params.name
     let message = params.message
 
-    if ( email !== "" || name !== "" || message !== "" ) {
+    if (name !== "" || message !== "" ) {
         try {
             let request = await transporter.sendMail({
                 to: process.env.STMP_EMAIL,
-                subject: `Message from ${name} - ${email}`,
+                subject: `Message from ${name}`,
                 text: message,
             })
 
             console.log(request.response)
 
-            
         } catch (e) {
             console.log(e)
         }
