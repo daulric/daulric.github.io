@@ -39,7 +39,7 @@ function Email() {
 
                     <br/> <br/>
                     <center>
-                        <button type="submit" id="submit-btn" >Send</button>
+                        <button type="submit" id="submit-btn">Send</button>
                     </center>
                     
                 </form>

@@ -1,6 +1,8 @@
 import React from "react"
 import Image from "next/image"
 
+import { createTransport } from "nodemailer"
+
 import "./success.css"
 
 export const metadata = {
@@ -8,10 +10,44 @@ export const metadata = {
     description: "Email Sent Successfully"
 }
 
-export default function EmailSuccess(props){
+export default async function EmailSuccess(props){
 
     const params = props.searchParams
     console.log(params)
+
+    let transporter = await createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.stmp_email,
+            pass: process.env.stmp_password
+        }
+    })
+
+    try {
+        await transporter.verify()
+    } catch(e) {
+        console.log(e)
+    }
+
+    let email = params.email
+    let name = params.name
+    let message = params.message
+
+    if ( email !== "" || name !== "" || message !== "" ) {
+        try {
+            let request = await transporter.sendMail({
+                to: "ulricaird@icloud.com",
+                subject: `Message from ${name} - ${email}`,
+                text: message,
+            })
+
+            console.log(request.response)
+
+            
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     return (
         <main id="mainclass" className="flex min-h-screen flex-col items-center justify-between p-20">
