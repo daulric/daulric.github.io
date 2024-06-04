@@ -29,6 +29,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: next-env
+        uses: natterstefan/action-next-env@v1.2.0      
       - name: Checkout
         uses: actions/checkout@v4
       - name: Detect package manager
