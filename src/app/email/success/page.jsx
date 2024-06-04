@@ -18,8 +18,8 @@ export default async function EmailSuccess(props){
     let transporter = await createTransport({
         service: "gmail",
         auth: {
-            user: process.env.stmp_email,
-            pass: process.env.stmp_password
+            user: process.env.STMP_EMAIL,
+            pass: process.env.STMP_PASSWORD
         }
     })
 
@@ -36,7 +36,7 @@ export default async function EmailSuccess(props){
     if ( email !== "" || name !== "" || message !== "" ) {
         try {
             let request = await transporter.sendMail({
-                to: "ulricaird@icloud.com",
+                to: process.env.STMP_EMAIL,
                 subject: `Message from ${name} - ${email}`,
                 text: message,
             })
