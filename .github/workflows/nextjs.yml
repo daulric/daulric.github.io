@@ -79,6 +79,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+        env:
+          STMP_EMAIL: ${{ secrets.STMP_EMAIL }}
+          STMP_PASSWORD: ${{ secrets.STMP_PASSWORD }}
 
   # Deployment job
   deploy:
