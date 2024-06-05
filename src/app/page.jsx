@@ -78,12 +78,14 @@ export default function AboutMe(){
                     link="https://www.roblox.com/groups/12852480"
                     text="Games"
                     info="This is a group with the list of game I made..."
+                    newTab={true}
                 />
 
                 <LinkCard 
                     link="https://github.com/daulric/DatabaseServiceApi"
                     text="Database Service API"
                     info="Created to connect and handle Firebase Realtime Database"
+                    newTab={true}
                 />
 
             </div>
