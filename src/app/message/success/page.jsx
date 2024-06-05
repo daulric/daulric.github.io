@@ -1,6 +1,8 @@
 import React from "react"
 import Image from "next/image"
 
+import LinkCard from "@/components/LinkCard"
+
 import { createTransport } from "nodemailer"
 
 import "./success.css"
@@ -13,26 +15,26 @@ export const metadata = {
 export default async function EmailSuccess(props){
 
     const params = props.searchParams
-    console.log(params)
-
-    let transporter = await createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.STMP_EMAIL,
-            pass: process.env.STMP_PASSWORD
-        }
-    })
-
-    try {
-        await transporter.verify()
-    } catch(e) {
-        console.log(e)
-    }
 
     let name = params.name
     let message = params.message
 
-    if (name !== "" || message !== "" ) {
+    if (name != "" || message != "" ) {
+
+        let transporter = await createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.STMP_EMAIL,
+                pass: process.env.STMP_PASSWORD
+            }
+        })
+    
+        try {
+            await transporter.verify()
+        } catch(e) {
+            console.log(e)
+        }
+
         try {
             let request = await transporter.sendMail({
                 to: process.env.STMP_EMAIL,
@@ -62,10 +64,17 @@ export default async function EmailSuccess(props){
 
             </div>
 
-            <div className="flex min-h-screen flex-col items-center justify-between p-10">
+            <div id="email-b" className="flex min-h-screen flex-col items-center justify-between p-1">
                 <h2 className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/3" > 
-                    Email Sent!
+                    Message Sent!
                 </h2>
+
+                <LinkCard
+                    text="Return Home"
+                    link="/"
+                    info="Go Back to the Home Page"
+                />
+
             </div>
             
         </main>

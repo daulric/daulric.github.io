@@ -1,27 +1,6 @@
 import React from "react"
 import Image from "next/image"
-
-function LinkCard(props) {
-    return (
-        <a
-            href={props.link}
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-                {props.text} {" "}
-                <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                    -&gt;
-                </span>
-            </h2>
-
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {props.info}
-            </p>
-        </a>
-    )
-}
+import LinkCard from "@/components/LinkCard"
 
 export default function AboutMe(){
     return (
@@ -57,17 +36,19 @@ export default function AboutMe(){
                     link="https://github.com/daulric"
                     text="Github"
                     info="Get More info on projects i have worked on!"
+                    newTab={true}
                 />
 
                 <LinkCard
                     link="https://instagram.com/ulricaird"
                     text="Instagram"
                     info="Get up to date with posts!"
+                    newTab={true}
                 />
 
                 <LinkCard 
-                    text="Send Email"
-                    link="/email"
+                    text="Send Message"
+                    link="/message"
                     info="Send a Personal Message"
                 />
             </div>

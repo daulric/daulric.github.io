@@ -1,0 +1,7 @@
+#mainclass {
+    overflow: hidden;
+}
+
+.min-h-screen {
+    min-height: 40vh;
+}

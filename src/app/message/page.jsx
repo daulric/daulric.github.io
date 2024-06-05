@@ -24,12 +24,12 @@ function Email() {
 
             <br/>
             <p className={`mb-3 text-2xl font-semibold`} >
-                <center>Send Email</center>
+                <center>Send Message</center>
             </p>
             
             <div >
             
-                <form action="/email/success">
+                <form action="/message/success">
 
                     <label htmlFor="name" className="name-label">Name</label> <br/>
                     <input className={`mb-3 text-2xl font-semibold`} id="name-label" type="text" name="name" required/> <br/>
