@@ -19,7 +19,20 @@ export default async function EmailSuccess(props){
     let name = params.name
     let message = params.message
 
-    if (name != "" || message != "" ) {
+    let stringtypeCheck = (
+        name === "" &&
+        message === ""
+    )
+
+    let typeCheck = (
+        typeof(name) !== "undefined" && 
+        typeof(message) !== "undefined" &&
+        name !== "" &&
+        message !== ""
+    )
+
+    console.log(typeCheck, stringtypeCheck)
+    if (typeCheck) {
 
         let transporter = await createTransport({
             service: "gmail",
