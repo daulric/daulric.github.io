@@ -2,14 +2,13 @@ import React from "react"
 import Image from "next/image"
 
 import LinkCard from "@/components/LinkCard"
-
-import { createTransport } from "nodemailer"
+import DiscordWebhook from "@/api/DiscordWebhook"
 
 import "./success.css"
 
 export const metadata = {
-    title: "Email Sent!",
-    description: "Email Sent Successfully"
+    title: "Message Sent!",
+    description: "Message Sent Successfully"
 }
 
 export default async function EmailSuccess(props){
@@ -19,11 +18,6 @@ export default async function EmailSuccess(props){
     let name = params.name
     let message = params.message
 
-    let stringtypeCheck = (
-        name === "" &&
-        message === ""
-    )
-
     let typeCheck = (
         typeof(name) !== "undefined" && 
         typeof(message) !== "undefined" &&
@@ -31,35 +25,8 @@ export default async function EmailSuccess(props){
         message !== ""
     )
 
-    console.log(typeCheck, stringtypeCheck)
     if (typeCheck) {
-
-        let transporter = await createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.STMP_EMAIL,
-                pass: process.env.STMP_PASSWORD
-            }
-        })
-    
-        try {
-            await transporter.verify()
-        } catch(e) {
-            console.log(e)
-        }
-
-        try {
-            let request = await transporter.sendMail({
-                to: process.env.STMP_EMAIL,
-                subject: `Message from ${name}`,
-                text: message,
-            })
-
-            console.log(request.response)
-
-        } catch (e) {
-            console.log(e)
-        }
+        DiscordWebhook(name, message)
     }
 
     return (

@@ -4,7 +4,7 @@ import Image from "next/image"
 import "./email.css"
 
 export const metadata = {
-    title: "daulric - Email"
+    title: "daulric - Message"
 }
 
 function Email() {
