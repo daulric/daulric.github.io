@@ -18,4 +18,4 @@ async function DiscordWebhook(name, message) {
     })
 }
 
-export default DiscordWebhook
+module.exports = DiscordWebhook
