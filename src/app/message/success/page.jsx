@@ -1,3 +1,5 @@
+'use server'
+
 import React from "react"
 import Image from "next/image"
 
@@ -11,7 +13,7 @@ export const metadata = {
     description: "Message Sent Successfully"
 }
 
-export default async function EmailSuccess(props){
+export default async function MsgSuccess(props){
 
     const params = props.searchParams
 
