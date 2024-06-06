@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 
 import LinkCard from "@/components/LinkCard"
-import Webhook from "@/api/Webhook"
+import Webhook from "@/components/Webhook"
 
 import "./success.css"
 
