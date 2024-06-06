@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 
 import LinkCard from "@/components/LinkCard"
-import DiscordWebhook from "@/api/DiscordWebhook"
+import Webhook from "@/api/Webhook"
 
 import "./success.css"
 
@@ -26,7 +26,7 @@ export default async function EmailSuccess(props){
     )
 
     if (typeCheck) {
-        DiscordWebhook(name, message)
+        Webhook(name, message)
     }
 
     return (

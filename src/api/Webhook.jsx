@@ -4,7 +4,7 @@ function DiscordWebhook(name, message) {
         content: message,
     }
 
-    fetch(process.env.DISCORD_WEBHOOK_ID, {
+    fetch(process.env.WEBHOOK_ID, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
