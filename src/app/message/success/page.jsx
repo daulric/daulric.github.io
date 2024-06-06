@@ -26,7 +26,9 @@ export default async function EmailSuccess(props){
     )
 
     if (typeCheck) {
-        Webhook(name, message)
+        Webhook(name, message).then(() => {
+            console.log("Message Sent to Guilded!")
+        })
     }
 
     return (

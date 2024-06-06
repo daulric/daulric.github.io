@@ -1,10 +1,10 @@
-function DiscordWebhook(name, message) {
+async function DiscordWebhook(name, message) {
     let params = {
         username: name,
         content: message,
     }
 
-    fetch(process.env.WEBHOOK_ID, {
+    await fetch(process.env.WEBHOOK_ID, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
