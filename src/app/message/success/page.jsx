@@ -4,7 +4,6 @@ import Image from "next/image"
 import http from "http"
 
 import LinkCard from "@/components/LinkCard"
-import Webhook from "@/components/Webhook"
 
 import "./success.css"
 
@@ -28,8 +27,17 @@ export default async function MsgSuccess(props){
     )
 
     if (typeCheck) {
-        Webhook(name, message).then(() => {
-            console.log("Message Sent to Guilded!")
+        await fetch(process.env.WEBHOOK_ID, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+    
+            body: JSON.stringify(params)
+        }).then(response => {
+            console.log("Success Status", response.status)
+        }).catch(err => {
+            console.log("Error Sending Message", err)
         })
     }
 
