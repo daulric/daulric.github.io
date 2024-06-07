@@ -1,46 +1,21 @@
 import React from "react"
 import Image from "next/image"
 
-import http from "http"
-
 import LinkCard from "@/components/LinkCard"
 
 import "./success.css"
+
+import { createTransport } from "nodemailer"
 
 export const metadata = {
     title: "Message Sent!",
     description: "Message Sent Successfully"
 }
 
-export default async function MsgSuccess(props){
-
-    const params = props.searchParams
-
-    let name = params.name
-    let message = params.message
-
-    let typeCheck = (
-        typeof(name) !== "undefined" && 
-        typeof(message) !== "undefined" &&
-        name !== "" &&
-        message !== ""
-    )
-
-    if (typeCheck) {
-        await fetch(process.env.WEBHOOK_ID, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-    
-            body: JSON.stringify(params)
-        }).then(response => {
-            console.log("Success Status", response.status)
-        }).catch(err => {
-            console.log("Error Sending Message", err)
-        })
+let SuccessPage =(props) => {
+    if (props.text === "") {
+        props.text = "Message Sent!"
     }
-
     return (
         <main id="mainclass" className="flex min-h-screen flex-col items-center justify-between p-20">
 
@@ -58,7 +33,7 @@ export default async function MsgSuccess(props){
 
             <div id="email-b" className="flex min-h-screen flex-col items-center justify-between p-1">
                 <h2 className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/3" > 
-                    Message Sent!
+                    {props.text}
                 </h2>
 
                 <LinkCard
@@ -71,4 +46,54 @@ export default async function MsgSuccess(props){
             
         </main>
     )
+}
+
+export default async function MsgSuccess(props){
+
+    const params = props.searchParams
+
+    let name = params.name
+    let message = params.message
+
+    let typeCheck = (
+        typeof(name) !== "undefined" && 
+        typeof(message) !== "undefined" &&
+        name !== "" &&
+        message !== ""
+    )
+
+    if (typeCheck) {
+        
+        let transporter = await createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.STMP_MAIL,
+                pass: process.env.STMP_PASS
+            }
+        })
+
+        try {
+            transporter.verify()
+        } catch(e) {
+            console.log(e)
+        }
+
+        try {
+            let request = await transporter.sendMail({
+                to: process.env.STMP_MAIL,
+                subject: `Message Sent From ${name}`,
+                text: message,
+            })
+
+            console.log(request.response)
+        } catch(e) {
+            console.log(e)
+        }
+
+        return <SuccessPage text="Message Sent!"/>
+
+    } else {
+        return <SuccessPage text="No Message Sent!"/>
+    } 
+
 }
