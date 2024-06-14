@@ -8,7 +8,10 @@ import { createTransport } from "nodemailer"
 
 export const metadata = {
     title: "Message",
-    description: "Message"
+    description: "Message",
+    icons: {
+        icon: "/avatar3.png"
+    }
 }
 
 export default async function MsgSuccess(props){
