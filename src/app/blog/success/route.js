@@ -1,4 +1,3 @@
-import {sql} from "@vercel/postgres"
 //import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 
@@ -11,8 +10,6 @@ export async function GET(req) {
         if (title === null || content === null || title === "" || content === "") {
             throw new Error("There is no title or content!")
         }
-
-        await sql`INSERT INTO blogs (title, content) VALUES(${title}, ${content})`
 
     } catch(err) {
         return NextResponse.json({err}, {status: 500})
