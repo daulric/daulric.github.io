@@ -15,6 +15,5 @@ export async function GET(req) {
         return NextResponse.json({err}, {status: 500})
     }
 
-    let blog_id = await sql`SELECT * FROM blogs`
     return NextResponse.json({blog_id}, {status: 200})
 }
