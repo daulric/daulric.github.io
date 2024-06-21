@@ -4,6 +4,8 @@ import Image from "next/image";
 import { initializeApp } from "firebase/app";
 import { ref, get, getDatabase } from "firebase/database"
 
+import "./style.css"
+
 export default async function BlogIndividual( props ) {
     let { params } = props;
     let blog_id = params.id
@@ -23,18 +25,25 @@ export default async function BlogIndividual( props ) {
 
     let response = await get(blog_ref)
     let data = response.val()
-    console.log(response.val())
+
+    if (data === null) {
+        data = {
+            title: "Error with Blog",
+            content: "Blog not found!"
+        } 
+    } else {
+        console.log(response.val())
     
-    let compare_id = Number(data.blog_id);
-    let compare_id2 = Number(blog_id)
+        let compare_id = Number(data.blog_id);
+        let compare_id2 = Number(blog_id)
 
-    console.log(compare_id, compare_id2)
+        if (compare_id !== compare_id2 ) {
+            throw new Error("Invalid Blog ID!")
+        }
 
-    if (compare_id !== compare_id2 ) {
-        throw new Error("Invalid Blog ID!")
+        console.log("Final Values", data)
     }
 
-    console.log("Final Values", data)
     
     return (
         <main id="mainclass" className="flex min-h-screen flex-col items-center justify-between p-20">
@@ -55,7 +64,7 @@ export default async function BlogIndividual( props ) {
 
             <div id="email-b" className="flex min-h-screen flex-col items-center justify-between p-1">
                 <p className={`mb-3 text-2xl font-semibold`} >
-                    <center>{data.title}</center>
+                    <center id="title-msg" >{data.title}</center>
 
                     <br/><br/>
                     <p id="content-msg">{data.content} </p>
