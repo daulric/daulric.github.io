@@ -67,7 +67,7 @@ export default async function BlogLandingPage() {
         measurementId: process.env.measurementId,
     })
 
-    let db = await getDatabase(app)
+    let db = getDatabase(app)
     let blogs_ref = ref(db, "/blogs")
     let blog_retrieval = get(blogs_ref)
     let blogs_data = blog_retrieval.val()
