@@ -74,7 +74,7 @@ export default async function BlogIndividual( props ) {
                     info="Returns to the home page"
                 />
 
-            </div>
+                </div>
                 
             </main>
 

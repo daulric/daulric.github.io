@@ -1,30 +1,27 @@
 import React from "react";
 import Image from "next/image";
+
 import { getDatabase, ref, get } from "firebase/database"
 
 import firebaseapp from "@/components/apps/firebaseapp"
+import LinkCard from "@/components/LinkCard";
 
 import "./style.css";
 
-async function CreateBlogLandingPage(props) {
+export const metadata = {
+    title: "Anonymous Blogs"
+}
+
+function CreateBlogLandingPage(props) {
     return ( 
-        <div class="blog-box" key={props.key} >
-            <div class="blog-text">
+        <div className="blog-box" >
+            <div className="blog-text">
                 <span>{props.date}</span>
-                <a href={props.link} class="blog-title">{props.title}</a>
+                <a href={props.link} className="blog-title">{props.title}</a>
                     <p>{props.info}</p>
                 <a href={props.link}>Read More</a>
             </div>
         </div>
-    )
-}
-
-async function loopPages(props) {
-    data = props.data
-    return (
-        <>
-            
-        </>
     )
 }
 
@@ -37,8 +34,6 @@ export default async function BlogLandingPage() {
 
     // Replace to timeCreated index from the database!
     let currentDate = new Date()
-
-    //console.log(blogs_data)
 
     return (
         <React.Fragment>
@@ -55,22 +50,46 @@ export default async function BlogLandingPage() {
                     />
                 </div>
 
-                <div class="blog-heading">
-                    <h3>Recent Blogs</h3>
+                <div className="blog-heading">
+                    <h3>Anonymous Blogs</h3>
+                    <br/><br/>
+                    <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+                        <LinkCard text="Create Blog" info="Create an Anonymous Blog" link="/blog/create" />
+                        <LinkCard text="Home" info="Return to the Home Page" link="/" />
+                    </div>
+                    
                 </div>
 
-                <div class="blog-container">
-                {
-                    Object.entries(blogs_data).map( ([key, value]) => {
-                        <CreateBlogLandingPage 
-                            key={key}
-                            title={value.title}
-                            info={value.info}
-                            link={`/blog/${value.blog_id}`}
-                        />
-                    })
-                }
+                <div className="blog-container">
+                    {
+                        Object.entries(blogs_data).map( ([key, value]) => {
+                            
+                            if (typeof(value) === "number") {
+                                return null;
+                            }
+
+                            if (typeof(value.timeCreated) === "undefined") {
+                                value.timeCreated = {
+                                    yr: currentDate.getFullYear(),
+                                    month: currentDate.getMonth() + 1,
+                                    date: currentDate.getDate(),
+                                }
+                            }
+
+                            return (
+                                <CreateBlogLandingPage
+                                    key={key}
+                                    title={value.title}
+                                    info={value.content}
+                                    link={`/blog/${value.blog_id}`}
+                                    date={`${value.timeCreated.yr}/${value.timeCreated.month}/${value.timeCreated.date}`}
+                                />
+                            )
+
+                        })
+                    }
                 </div>
+
         
             </section>
         </React.Fragment>

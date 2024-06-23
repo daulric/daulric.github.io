@@ -54,6 +54,12 @@ export default function AboutMe(){
                     info="Get up to date with posts!"
                     newTab={true}
                 />
+                
+                <LinkCard
+                    link="/blog"
+                    text="Blogs"
+                    info="Get all Anonymous Blogs created by random users!"
+                />
 
                 <LinkCard 
                     text="Send Message"

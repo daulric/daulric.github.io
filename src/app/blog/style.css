@@ -1,9 +1,9 @@
 *{
     margin: 0px;
     padding: 0px;
-    font-family: poppins;
     box-sizing: border-box;
 }
+
 ul{
     list-style: none;
 }
@@ -14,7 +14,6 @@ a{
 body{
     margin: 0px;
     padding: 0px;
-    font-family: poppins;
 }
  
 /*--blog--------------------------*/
