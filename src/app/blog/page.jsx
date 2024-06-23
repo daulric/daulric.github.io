@@ -5,24 +5,12 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get } from "firebase/database"
 
 import LinkCard from "@/components/LinkCard";
+import BlogCard from "@/components/BlogCard";
 
 import "./style.css";
 
 export const metadata = {
     title: "Anonymous Blogs"
-}
-
-function CreateBlogLandingPage(props) {
-    return ( 
-        <div className="blog-box" >
-            <div className="blog-text">
-                <span>{props.date}</span>
-                <a href={props.link} className="blog-title">{props.title}</a>
-                    <p>{props.info}</p>
-                <a href={props.link}>Read More</a>
-            </div>
-        </div>
-    )
 }
 
 export default async function BlogLandingPage() {
@@ -84,7 +72,7 @@ export default async function BlogLandingPage() {
                                 }
 
                                 return (
-                                    <CreateBlogLandingPage
+                                    <BlogCard
                                         key={key}
                                         title={value.title}
                                         info={value.content}
