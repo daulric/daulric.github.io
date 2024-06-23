@@ -42,7 +42,7 @@ export default async function BlogLandingPage() {
     let blog_retrieval = await get(blogs_ref)
     let blogs_data = blog_retrieval.val()
 
-    // Replace to timeCreated index from the database!
+    // Replace to timeCreated index if found in the database!
     let currentDate = new Date()
 
     return (
@@ -74,33 +74,31 @@ export default async function BlogLandingPage() {
                     {
                         Object.entries(blogs_data).map( ([key, value]) => {
                             
-                            if (typeof(value) === "number") {
-                                return null;
-                            }
-
-                            if (typeof(value.timeCreated) === "undefined") {
-                                value.timeCreated = {
-                                    yr: currentDate.getFullYear(),
-                                    month: currentDate.getMonth() + 1,
-                                    date: currentDate.getDate(),
+                            if (typeof(value) !== "number") {
+                                if (typeof(value.timeCreated) === "undefined") {
+                                    value.timeCreated = {
+                                        yr: currentDate.getFullYear(),
+                                        month: currentDate.getMonth() + 1,
+                                        date: currentDate.getDate(),
+                                    }
                                 }
-                            }
 
-                            return (
-                                <CreateBlogLandingPage
-                                    key={key}
-                                    title={value.title}
-                                    info={value.content}
-                                    link={`/blog/${value.blog_id}`}
-                                    date={`${value.timeCreated.yr}/${value.timeCreated.month}/${value.timeCreated.date}`}
-                                />
-                            )
+                                return (
+                                    <CreateBlogLandingPage
+                                        key={key}
+                                        title={value.title}
+                                        info={value.content}
+                                        link={`/blog/${value.blog_id}`}
+                                        date={`${value.timeCreated.yr}/${value.timeCreated.month}/${value.timeCreated.date}`}
+                                    />
+                                )
+
+                            }
 
                         })
                     }
                 </div>
 
-        
             </section>
         </React.Fragment>
     )
