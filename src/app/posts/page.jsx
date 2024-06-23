@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 
+import { unstable_noStore as noStore } from "next/cache"
+
 import { ref, get } from "firebase/database"
 
 import {db} from "@/components/items/firebaseapp"
@@ -15,6 +17,7 @@ export const metadata = {
 }
 
 async function handleBlogs() {
+    noStore()
     const blogs_ref = ref(db, "/blogs")
     const blog_retrieval = await get(blogs_ref)
     const data = blog_retrieval.val()
@@ -88,7 +91,10 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-container">
-                    { handleBlogs() }
+                    <React.Suspense fallback={<p>Loading...</p>}>
+                        { handleBlogs() }
+                    </React.Suspense>
+
                 </div>
             </section>
         </React.Fragment>
