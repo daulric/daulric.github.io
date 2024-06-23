@@ -72,17 +72,17 @@ export default async function BlogIndividual( props ) {
 
                 <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
 
-                <LinkCard
-                    link="/blog/posts"
-                    text="Return to Blogs"
-                    info="Returns to the blog page to view more blogs!"
-                />
+                    <LinkCard
+                        link="/posts"
+                        text="Return to Blogs"
+                        info="Returns to the blog page to view more blogs!"
+                    />
 
-                <LinkCard
-                    link="/home"
-                    text="Return Home"
-                    info="Returns to the home page"
-                />
+                    <LinkCard
+                        link="/home"
+                        text="Return Home"
+                        info="Returns to the home page"
+                    />
 
                 </div>
                 

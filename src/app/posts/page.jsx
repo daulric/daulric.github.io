@@ -56,7 +56,7 @@ function handleBlogs(blogs_data) {
 }
 
 export default async function BlogLandingPage() {
-
+/*
     const app = initializeApp({
         apiKey: process.env.apiKey,
         authDomain: process.env.authDomain,
@@ -71,7 +71,7 @@ export default async function BlogLandingPage() {
     let blogs_ref = ref(db, "/blogs")
     let blog_retrieval = await get(blogs_ref)
     let blogs_data = blog_retrieval.val()
-
+*/
     return (
         <React.Fragment>
             <section id="blog">
@@ -98,7 +98,7 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-container">
-                    { handleBlogs(blogs_data) }
+                    { /* handleBlogs(blogs_data) */ }
                 </div>
             </section>
         </React.Fragment>
