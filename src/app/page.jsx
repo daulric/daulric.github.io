@@ -56,7 +56,7 @@ export default function AboutMe(){
                 />
                 
                 <LinkCard
-                    link="/blog"
+                    link="/blog/posts"
                     text="Blogs"
                     info="Get all Anonymous Blogs created by random users!"
                 />
