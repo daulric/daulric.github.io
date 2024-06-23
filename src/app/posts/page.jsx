@@ -17,7 +17,7 @@ export const metadata = {
 }
 
 async function handleBlogs() {
-    
+    noStore()
     const blogs_ref = ref(db, "/blogs/data")
     const blog_retrieval = await get(blogs_ref)
     const data = blog_retrieval.val()
