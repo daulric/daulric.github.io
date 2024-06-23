@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { getDatabase, ref, get } from "firebase/database"
 
-import firebaseapp from "@/components/apps/firebaseapp"
+import {app} from "@/components/apps/firebaseapp"
 import LinkCard from "@/components/LinkCard";
 
 import "./style.css";
@@ -27,7 +27,7 @@ function CreateBlogLandingPage(props) {
 
 export default async function BlogLandingPage() {
 
-    let db = getDatabase(firebaseapp)
+    let db = getDatabase(app)
     let blogs_ref = ref(db, "/blogs")
     let blog_retrieval = await get(blogs_ref)
     let blogs_data = blog_retrieval.val()

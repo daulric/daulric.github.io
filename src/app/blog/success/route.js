@@ -1,7 +1,7 @@
 //import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 
-import firebaseapp from "@/components/apps/firebaseapp"
+import {app} from "@/components/apps/firebaseapp"
 import { ref, get, set, getDatabase } from "firebase/database"
 import { redirect } from "next/navigation"
 
@@ -10,7 +10,7 @@ export async function GET(req) {
     let title = searchParams.get('title')
     let content = searchParams.get('content')
 
-    let db = getDatabase(firebaseapp)
+    let db = getDatabase(app)
 
     try {
         if (title === null || content === null || title === "" || content === "") {

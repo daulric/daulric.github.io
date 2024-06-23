@@ -10,4 +10,4 @@ const app = initializeApp({
     measurementId: process.env.measurementId,
 })
 
-module.exports = app
+export { app }
