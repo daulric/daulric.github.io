@@ -2,6 +2,9 @@ import React from "react";
 import Image from "next/image";
 
 import { unstable_noStore as noStore } from "next/cache"
+import { db } from "@/components/items/firebaseapp"
+
+import { ref, get } from "firebase/database"
 
 import LinkCard from "@/components/LinkCard";
 import BlogCard from "@/components/BlogCard";
@@ -12,19 +15,25 @@ export const metadata = {
     title: "Anonymous Blogs"
 }
 
-async function handleBlogs() {
-    noStore()
-    const data = await fetch('http://localhost:3000/posts/get' , {
-        method: "GET",
+async function getData () {
+    const blogs_ref = ref(db, "/blogs/data")
+    const data = await get(blogs_ref).then((data) => {
+        return data.val()
     })
 
-    let info = await data.json()
+    return data
+}
+
+async function handleBlogs() {
+    noStore()
+
+    const data = await getData()
 
     return (
 
         <React.Fragment>
             {
-                info.map((item) => {
+                data.map((item) => {
                     if (typeof item === "number") return null;
                     if (typeof item.timeCreated === "undefined") return null;
 
@@ -45,8 +54,7 @@ async function handleBlogs() {
     )
 }
 
-export default async function BlogLandingPage( {data} ) {
-
+export default async function BlogLandingPage() {
     return (
         <React.Fragment>
             <section id="blog">
