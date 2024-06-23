@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import Image from "next/image";
 
@@ -8,10 +10,6 @@ import LinkCard from "@/components/LinkCard";
 import BlogCard from "@/components/BlogCard";
 
 import "./style.css";
-
-export const metadata = {
-    title: "Anonymous Blogs"
-}
 
 export default async function BlogLandingPage() {
 
