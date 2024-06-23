@@ -16,9 +16,14 @@ export const metadata = {
     title: "Anonymous Blogs"
 }
 
+function noop() {
+    let tempData = data[key]
+                    
+}
+
 async function handleBlogs() {
    noStore()
-    const blogs_ref = ref(db, "/blogs")
+    const blogs_ref = ref(db, "/blogs/data")
     const blog_retrieval = await get(blogs_ref)
     const data = blog_retrieval.val()
 
@@ -26,21 +31,19 @@ async function handleBlogs() {
 
         <React.Fragment>
             {
-                Object.keys(data).map((key) => {
-                    let tempData = data[key]
-                    if (typeof tempData === "number") return null;
-                    if (typeof tempData.timeCreated === "undefined") return null;
+                data.map((item) => {
+                    if (typeof item === "number") return null;
+                    if (typeof item.timeCreated === "undefined") return null;
 
                     return (
                         <BlogCard
-                            key={key}
-                            title={tempData.title}
-                            info={tempData.content}
-                            link={`/blog/${tempData.blog_id}`}
-                            date={`${tempData.timeCreated.yr}/${tempData.timeCreated.month}/${tempData.timeCreated.date}`}
+                            key={item.blog_id}
+                            title={item.title}
+                            info={item.content}
+                            link={`/blog/${item.blog_id}`}
+                            date={`${item.timeCreated.yr}/${item.timeCreated.month}/${item.timeCreated.date}`}
                         />
                     )
-
                 })
             }
 

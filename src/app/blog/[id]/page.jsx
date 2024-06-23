@@ -12,20 +12,18 @@ export default async function BlogIndividual( props ) {
     let { params } = props;
     let blog_id = params.id
 
-    let blog_ref = ref(db, `/blogs/${blog_id}`)
+    let blog_ref = ref(db, `/blogs/data`)
 
     let response = await get(blog_ref)
-    let data = response.val()
 
-    if (data === null) {
+    //console.log(response.val())
+    let itemFound = response.val().filter((item) => item.blog_id === Number(blog_id))
+    let data = itemFound[0];
+
+    if ( itemFound.length === 0 ) {
         data = {
             title: "Error with Blog",
             content: "Blog not found!"
-        }
-    } else if (Number(data.blog_id) !== Number(blog_id)) {
-        data = {
-            title: `Blog ID not matched in database!`,
-            content: `${data.blog_id} is not the same blog as ${blog_id} from the database!`
         }
     }
     

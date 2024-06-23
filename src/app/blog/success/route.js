@@ -2,7 +2,9 @@
 import { NextResponse } from "next/server"
 
 import { db } from "@/components/items/firebaseapp"
-import { ref, get, set, getDatabase } from "firebase/database"
+import { ref, get, set, update, push } from "firebase/database"
+
+import fatabase from "firebase/database"
 
 export async function GET(req) {
     let { searchParams } = new URL(req.url)
@@ -34,12 +36,14 @@ export async function GET(req) {
             yr: currentDate.getFullYear()
         }
 
-        await set(ref(db, `/blogs/${currentId}`), {
+        let pushedData = {
             blog_id: currentId,
             title: title,
             content: content,
             timeCreated: dateFormat
-        }).then(() => {
+        }
+
+        await  set(ref(db, `/blogs/data/${currentId - 1}`), pushedData).then(() => {
             set(currentIdRef, currentId)
         })
 
