@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 import { db } from "@/components/items/firebaseapp"
 import { ref, get, set, update, push } from "firebase/database"
 
-export const maxDuration = 10;
+export const maxDuration = 60;
 
 export async function GET(req) {
     let { searchParams } = new URL(req.url)
