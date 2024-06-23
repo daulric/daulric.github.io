@@ -97,7 +97,7 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-container">
-                    { handleBlogs(blogs_data) }
+                    { /*handleBlogs(blogs_data)*/ }
                 </div>
             </section>
         </React.Fragment>
