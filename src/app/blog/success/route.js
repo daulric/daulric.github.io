@@ -1,25 +1,13 @@
 //import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 
-import { initializeApp } from "firebase/app"
+import { db } from "@/components/items/firebaseapp"
 import { ref, get, set, getDatabase } from "firebase/database"
 
 export async function GET(req) {
     let { searchParams } = new URL(req.url)
     let title = searchParams.get('title')
     let content = searchParams.get('content')
-
-    const app = initializeApp({
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-        measurementId: process.env.measurementId,
-    })
-
-    let db = getDatabase(app)
 
     try {
         if (title === null || content === null || title === "" || content === "") {
