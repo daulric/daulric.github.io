@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get } from "firebase/database"
+import { ref, get } from "firebase/database"
 
 import {db} from "@/components/items/firebaseapp"
 
@@ -16,16 +15,16 @@ export const metadata = {
 }
 
 async function handleBlogs() {
-    let blogs_ref = ref(db, "/blogs")
-    let blog_retrieval = await get(blogs_ref)
-    let data = await blog_retrieval.val()
+    const blogs_ref = ref(db, "/blogs")
+    const blog_retrieval = await get(blogs_ref)
+    const data = await blog_retrieval.val()
 
     return (
 
         <React.Fragment>
             {
-            Object.entries(data).map( ([key, value]) => {
-                            
+                Object.entries(data).map( ([key, value]) => {
+  
                     if (typeof(value) !== "number") {
 
                         if (typeof(value.timeCreated) === "undefined") {
@@ -88,7 +87,7 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-container">
-                    { }
+                    { handleBlogs() }
                 </div>
             </section>
         </React.Fragment>
