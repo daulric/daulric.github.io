@@ -17,7 +17,7 @@ export const metadata = {
 }
 
 async function handleBlogs() {
-    //noStore()
+   noStore()
     const blogs_ref = ref(db, "/blogs")
     const blog_retrieval = await get(blogs_ref)
     const data = blog_retrieval.val()
@@ -26,37 +26,23 @@ async function handleBlogs() {
 
         <React.Fragment>
             {
-                Object.entries(data).map( ([key, value]) => {
-  
-                    if (typeof(value) !== "object") {
-                        return null;
-                    }
-
-                    if (typeof(value.timeCreated) === "undefined") {
-                        return (
-                            <BlogCard
-                                key={key}
-                                title={value.title}
-                                info={value.content}
-                                link={`/blog/${value.blog_id}`}
-                            />
-                        )
-                    }
+                Object.keys(data).map((key) => {
+                    let tempData = data[key]
+                    if (typeof tempData === "number") return null;
+                    if (typeof tempData.timeCreated === "undefined") return null;
 
                     return (
                         <BlogCard
                             key={key}
-                            title={value.title}
-                            info={value.content}
-                            link={`/blog/${value.blog_id}`}
-                            date={`${value.timeCreated.yr}/${value.timeCreated.month}/${value.timeCreated.date}`}
+                            title={tempData.title}
+                            info={tempData.content}
+                            link={`/blog/${tempData.blog_id}`}
+                            date={`${tempData.timeCreated.yr}/${tempData.timeCreated.month}/${tempData.timeCreated.date}`}
                         />
                     )
 
                 })
-
             }
-
 
         </React.Fragment>
 
