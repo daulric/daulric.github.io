@@ -13,8 +13,49 @@ export const metadata = {
     title: "Anonymous Blogs"
 }
 
-export default async function BlogLandingPage() {
+function handleBlogs(blogs_data) {
 
+    return (
+
+        <React.Fragment>
+            {
+            Object.entries(blogs_data).map( ([key, value]) => {
+                            
+                    if (typeof(value) !== "number") {
+
+                        if (typeof(value.timeCreated) === "undefined") {
+                            return (
+                                <BlogCard
+                                    key={key}
+                                    title={value.title}
+                                    info={value.content}
+                                    link={`/blog/${value.blog_id}`}
+                                />
+                            )
+                        }
+
+                        return (
+                            <BlogCard
+                                key={key}
+                                title={value.title}
+                                info={value.content}
+                                link={`/blog/${value.blog_id}`}
+                                date={`${value.timeCreated.yr}/${value.timeCreated.month}/${value.timeCreated.date}`}
+                            />
+                        )
+                    }
+
+                })
+
+            }
+
+
+        </React.Fragment>
+
+    )
+}
+
+export default async function BlogLandingPage() {
     const app = initializeApp({
         apiKey: process.env.apiKey,
         authDomain: process.env.authDomain,
@@ -56,35 +97,7 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-container">
-                    {
-                        Object.entries(blogs_data).map( ([key, value]) => {
-                            
-                            if (typeof(value) !== "number") {
-
-                                if (typeof(value.timeCreated) === "undefined") {
-                                    return (
-                                        <BlogCard
-                                            key={key}
-                                            title={value.title}
-                                            info={value.content}
-                                            link={`/blog/${value.blog_id}`}
-                                        />
-                                    )
-                                }
-
-                                return (
-                                    <BlogCard
-                                        key={key}
-                                        title={value.title}
-                                        info={value.content}
-                                        link={`/blog/${value.blog_id}`}
-                                        date={`${value.timeCreated.yr}/${value.timeCreated.month}/${value.timeCreated.date}`}
-                                    />
-                                )
-                            }
-
-                        })
-                    }
+                    { handleBlogs(blogs_data) }
                 </div>
             </section>
         </React.Fragment>
