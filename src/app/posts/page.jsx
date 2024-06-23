@@ -25,29 +25,30 @@ async function handleBlogs() {
             {
                 Object.entries(data).map( ([key, value]) => {
   
-                    if (typeof(value) !== "number") {
+                    if (typeof(value) !== "object") {
+                        return null;
+                    }
 
-                        if (typeof(value.timeCreated) === "undefined") {
-                            return (
-                                <BlogCard
-                                    key={key}
-                                    title={value.title}
-                                    info={value.content}
-                                    link={`/blog/${value.blog_id}`}
-                                />
-                            )
-                        }
-
+                    if (typeof(value.timeCreated) === "undefined") {
                         return (
                             <BlogCard
                                 key={key}
                                 title={value.title}
                                 info={value.content}
                                 link={`/blog/${value.blog_id}`}
-                                date={`${value.timeCreated.yr}/${value.timeCreated.month}/${value.timeCreated.date}`}
                             />
                         )
                     }
+
+                    return (
+                        <BlogCard
+                            key={key}
+                            title={value.title}
+                            info={value.content}
+                            link={`/blog/${value.blog_id}`}
+                            date={`${value.timeCreated.yr}/${value.timeCreated.month}/${value.timeCreated.date}`}
+                        />
+                    )
 
                 })
 
@@ -87,7 +88,7 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-container">
-                    { handleBlogs() }
+                    {  }
                 </div>
             </section>
         </React.Fragment>
