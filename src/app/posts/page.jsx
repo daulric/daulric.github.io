@@ -15,13 +15,16 @@ export const metadata = {
     title: "Anonymous Blogs"
 }
 
-function handleBlogs(blogs_data) {
+async function handleBlogs() {
+    let blogs_ref = ref(db, "/blogs")
+    let blog_retrieval = await get(blogs_ref)
+    let data = await blog_retrieval.val()
 
     return (
 
         <React.Fragment>
             {
-            Object.entries(blogs_data).map( ([key, value]) => {
+            Object.entries(data).map( ([key, value]) => {
                             
                     if (typeof(value) !== "number") {
 
@@ -59,10 +62,6 @@ function handleBlogs(blogs_data) {
 
 export default async function BlogLandingPage() {
 
-    let blogs_ref = ref(db, "/blogs")
-    let blog_retrieval = get(blogs_ref)
-    let blogs_data = await blog_retrieval.val()
-
     return (
         <React.Fragment>
             <section id="blog">
@@ -89,7 +88,7 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-container">
-                    { /* handleBlogs(blogs_data) */ }
+                    { handleBlogs() }
                 </div>
             </section>
         </React.Fragment>
