@@ -4,6 +4,8 @@ import Image from "next/image";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get } from "firebase/database"
 
+import {db} from "@/components/items/firebaseapp"
+
 import LinkCard from "@/components/LinkCard";
 import BlogCard from "@/components/BlogCard";
 
@@ -57,20 +59,9 @@ function handleBlogs(blogs_data) {
 
 export default async function BlogLandingPage() {
 
-    const app = initializeApp({
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-        measurementId: process.env.measurementId,
-    })
-
-    let db = getDatabase(app)
     let blogs_ref = ref(db, "/blogs")
     let blog_retrieval = get(blogs_ref)
-    let blogs_data = blog_retrieval.val()
+    let blogs_data = await blog_retrieval.val()
 
     return (
         <React.Fragment>
