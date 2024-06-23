@@ -1,7 +1,7 @@
 //import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 
-import { initializeApp } from "firebase/app"
+import firebaseapp from "@/components/apps/firebaseapp"
 import { ref, get, set, getDatabase } from "firebase/database"
 import { redirect } from "next/navigation"
 
@@ -10,17 +10,7 @@ export async function GET(req) {
     let title = searchParams.get('title')
     let content = searchParams.get('content')
 
-    const app = initializeApp({
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-        measurementId: process.env.measurementId,
-    })
-
-    let db = getDatabase(app)
+    let db = getDatabase(firebaseapp)
 
     try {
         if (title === null || content === null || title === "" || content === "") {
@@ -39,11 +29,19 @@ export async function GET(req) {
         })
 
         currentId += 1;
+        let currentDate = new Date()
+
+        let dateFormat =  {
+            date: currentDate.getDate(),
+            month: currentDate.getMonth() + 1,
+            yr: currentDate.getFullYear()
+        }
 
         await set(ref(db, `/blogs/${currentId}`), {
             blog_id: currentId,
             title: title,
             content: content,
+            timeCreated: dateFormat
         }).then(() => {
             set(currentIdRef, currentId)
         })

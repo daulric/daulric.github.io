@@ -1,7 +1,7 @@
 import React from "react";
 
 import Image from "next/image";
-import { initializeApp } from "firebase/app";
+import firebaseapp from "@/components/apps/firebaseapp"
 import { ref, get, getDatabase } from "firebase/database"
 
 import LinkCard from "@/components/LinkCard";
@@ -12,17 +12,7 @@ export default async function BlogIndividual( props ) {
     let { params } = props;
     let blog_id = params.id
 
-    const app = initializeApp({
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-        measurementId: process.env.measurementId,
-    })
-
-    let db = getDatabase(app)
+    let db = getDatabase(firebaseapp)
     let blog_ref = ref(db, `/blogs/${blog_id}`)
 
     let response = await get(blog_ref)
