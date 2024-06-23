@@ -56,7 +56,7 @@ function handleBlogs(blogs_data) {
 }
 
 export default async function BlogLandingPage() {
-/*
+
     const app = initializeApp({
         apiKey: process.env.apiKey,
         authDomain: process.env.authDomain,
@@ -67,11 +67,11 @@ export default async function BlogLandingPage() {
         measurementId: process.env.measurementId,
     })
 
-    let db = getDatabase(app)
+    let db = await getDatabase(app)
     let blogs_ref = ref(db, "/blogs")
-    let blog_retrieval = await get(blogs_ref)
+    let blog_retrieval = get(blogs_ref)
     let blogs_data = blog_retrieval.val()
-*/
+
     return (
         <React.Fragment>
             <section id="blog">
