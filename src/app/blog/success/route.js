@@ -41,11 +41,11 @@ export async function GET(req) {
             timeCreated: dateFormat
         }
 
-        await  set(ref(db, `/blogs/data/${currentId - 1}`), pushedData).then(() => {
+        await set(ref(db, `/blogs/data/${currentId - 1}`), pushedData).then(() => {
             set(currentIdRef, currentId)
         })
 
-        return await NextResponse.redirect(new URL(`/blog/${currentId}`, req.url))
+        return await NextResponse.redirect(new URL(`/blog/${currentId - 1}`, req.url))
     } catch(err) {
         return NextResponse.json({err}, {status: 500})
     }
