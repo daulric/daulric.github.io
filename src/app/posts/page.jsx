@@ -16,13 +16,8 @@ export const metadata = {
     title: "Anonymous Blogs"
 }
 
-function noop() {
-    let tempData = data[key]
-                    
-}
-
 async function handleBlogs() {
-   noStore()
+    
     const blogs_ref = ref(db, "/blogs/data")
     const blog_retrieval = await get(blogs_ref)
     const data = blog_retrieval.val()
@@ -80,10 +75,8 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-container">
-                    <React.Suspense fallback={<p>Loading...</p>}>
+                    
                         { handleBlogs() }
-                    </React.Suspense>
-
                 </div>
             </section>
         </React.Fragment>
