@@ -1,6 +1,8 @@
 import { db } from "@/components/items/firebaseapp"
 import { ref, get, set } from "firebase/database"
 
+export const maxDuration = 60;
+
 export async function GET(req) {
     let { searchParams } = new URL(req.url)
     let title = searchParams.get('title')
@@ -42,7 +44,6 @@ export async function GET(req) {
             set(currentIdRef, currentId)
         })
 
-        
         return Response.redirect(new URL(`/blogs/${currentId -1 }`, req.url))
     } catch(err) {
         return Response.json({err}, {status: 500})
