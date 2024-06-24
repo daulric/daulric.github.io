@@ -29,10 +29,15 @@ async function handleBlogs() {
 
     const data = await getData()
 
+    if (data === null) {
+        return  <React.Fragment />;
+    }
+
     return (
 
         <React.Fragment>
             {
+                
                 data.map((item) => {
                     if (typeof item === "number") return null;
                     if (typeof item.timeCreated === "undefined") return null;
