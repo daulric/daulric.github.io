@@ -43,7 +43,7 @@ export async function GET(req) {
         })
 
         
-        return Response.redirect(new URL(`/blog/${currentId - 1}`, req.url))
+        return Response.redirect(`/blog/${currentId - 1}`)
     } catch(err) {
         return Response.json({err}, {status: 500})
     }
