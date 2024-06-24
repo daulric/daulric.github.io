@@ -26,6 +26,8 @@ export default async function BlogIndividual( props ) {
             content: "Blog not found!"
         }
     }
+
+    console.log(data)
     
     return (
         <React.Fragment>
@@ -51,10 +53,9 @@ export default async function BlogIndividual( props ) {
                         <center id="title-msg" >{data.title}</center>
 
                         <br/><br/>
-                        <p id="content-msg">{data.content} </p>
+                        <p id="content-msg" style={{whiteSpace: "pre-line"}}>{data.content} </p>
                     </p>
 
-                    
                 </div>
 
                 <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">

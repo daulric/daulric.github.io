@@ -1,6 +1,3 @@
-//import { redirect } from "next/navigation"
-import { NextResponse } from "next/server"
-
 import { db } from "@/components/items/firebaseapp"
 import { ref, get, set } from "firebase/database"
 
@@ -45,9 +42,10 @@ export async function GET(req) {
             set(currentIdRef, currentId)
         })
 
-        return await NextResponse.redirect(new URL(`/blog/${currentId - 1}`, req.url))
+        
+        return Response.redirect(new URL(`/blog/${currentId - 1}`, req.url))
     } catch(err) {
-        return NextResponse.json({err}, {status: 500})
+        return Response.json({err}, {status: 500})
     }
 
 }
