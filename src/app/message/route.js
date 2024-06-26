@@ -12,6 +12,7 @@ export async function POST(req) {
         message !== ""
     )
 
+    // Check the type or it will trhrow an error
     if (typeCheck) {
 
         let transporter = await createTransport({
