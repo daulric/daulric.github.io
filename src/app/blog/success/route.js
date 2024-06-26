@@ -38,5 +38,8 @@ export async function POST(req) {
         set(current_id_ref, new_Id)
     })
 
-    return NextResponse.json(data)
+    return NextResponse.json({
+        data: data,
+        redirect_id: current_id,
+    })
 }
