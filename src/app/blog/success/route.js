@@ -17,7 +17,6 @@ export async function POST(req) {
     }
 
     let new_Id = current_id + 1;
-    let blog_id = current_id - 1
     let blogs_ref = ref(db, `/blogs/data`)
 
     let currentDate = new Date()
