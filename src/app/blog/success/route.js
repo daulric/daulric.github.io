@@ -27,16 +27,16 @@ export async function POST(req) {
         yr: currentDate.getFullYear()
     }
 
-    await push(blogs_ref, {
+    const data = {
         blog_id: current_id,
         title: body_data.title,
         content: body_data.content,
         timeCreated: dateFormat
-    }) .then(() => {
+    }
+
+    await push(blogs_ref, data) .then(() => {
         set(current_id_ref, new_Id)
     })
 
-    return NextResponse.json({
-        message: 'ok'
-    })
+    return NextResponse.json(data)
 }
