@@ -3,6 +3,8 @@ import { db } from "@/components/firebaseapp"
 import { get, ref, set } from "firebase/database"
 import { NextResponse } from "next/server"
 
+export const dynamic = "fore-dynamic"
+
 export async function GET(req, { params }) {
     let id = Number(params.id)
     let blog_id_ref = ref(db, `/blogs/data`)
