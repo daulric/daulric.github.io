@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
-    "start": "next start --hostname 0.0.0.0",
+    "start": "next start",
     "lint": "next lint",
     "deploy": "next build && next export && git add out/ && git commit -m \"Deploy gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
@@ -14,7 +14,7 @@
     "@vercel/speed-insights": "^1.0.11",
     "firebase": "^10.12.2",
     "next": "14.2.3",
-    "nodemailer": "^6.9.13",
+    "nodemailer": "^6.9.14",
     "react": "^18",
     "react-dom": "^18"
   },

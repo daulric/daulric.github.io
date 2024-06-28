@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 
 import { unstable_noStore as noStore } from "next/cache"
-import { db } from "@/components/items/firebaseapp"
 
-import { ref, get } from "firebase/database"
+import { db } from "@/components/items/firebaseapp";
+import { get, ref } from "firebase/database";
 
 import LinkCard from "@/components/LinkCard";
 import BlogCard from "@/components/BlogCard";
@@ -16,29 +16,38 @@ export const metadata = {
 }
 
 async function getData () {
-    const blogs_ref = ref(db, "/blogs/data")
-    const data = await get(blogs_ref).then((data) => {
-        return data.val()
+    let data = [];
+
+    let blogs_ref = ref(db, '/blogs/data')
+    let blogs_data = await get(blogs_ref).then(response => response.val())
+
+    Object.keys(blogs_data).map(key => {
+        let temp_data = blogs_data[key];
+        data.push(temp_data)
     })
 
-    return data
+    return data;
+
 }
 
 async function handleBlogs() {
     noStore()
 
-    const data = await getData()
+    const items = await getData()
 
-    if (data === null) {
+    if ( items === null) {
         return  <React.Fragment />;
+    }
+
+    if ( items.length === 0) {
+        return <React.Fragment />;
     }
 
     return (
 
         <React.Fragment>
-            {
-                
-                data.map((item) => {
+            { 
+                items.map((item) => {
                     if (typeof item === "number") return null;
                     if (typeof item.timeCreated === "undefined") return null;
 

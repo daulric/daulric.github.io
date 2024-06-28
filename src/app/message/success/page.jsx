@@ -1,10 +1,10 @@
 import React from "react"
 
+import { createTransport } from "nodemailer"
+
 import SuccessPage from "@/components/SuccessPage"
 
 import "./success.css"
-
-import { createTransport } from "nodemailer"
 
 export const metadata = {
     title: "Message",
@@ -17,9 +17,8 @@ export const metadata = {
 export default async function MsgSuccess(props){
 
     const params = props.searchParams
-
-    let name = params.name
-    let message = params.message
+    
+    const {name, message} = params
 
     let typeCheck = (
         typeof(name) !== "undefined" && 
@@ -29,8 +28,7 @@ export default async function MsgSuccess(props){
     )
 
     if (typeCheck) {
-        
-        let transporter = await createTransport({
+        let transporter = createTransport({
             service: "gmail",
             auth: {
                 user: process.env.STMP_MAIL,
@@ -39,27 +37,27 @@ export default async function MsgSuccess(props){
         })
 
         try {
-            transporter.verify()
-        } catch(e) {
-            console.log(e)
-        }
-
-        try {
-            let request = await transporter.sendMail({
-                to: process.env.STMP_MAIL,
-                subject: `Message Sent From ${name}`,
-                text: message,
+            let response = await transporter.verify().then(() => {
+                return transporter.sendMail({
+                    to: process.env.STMP_MAIL,
+                    subject: `Message Sent From ${name}`,
+                    text: message,
+                }).then((response) => {
+                    return response.messageId
+                })
             })
 
-            console.log(request.response)
+            if (response) {
+                return <SuccessPage text="Message Sent!"/>
+            }
         } catch(e) {
             console.log(e)
         }
 
-        return <SuccessPage text="Message Sent!"/>
+        return <SuccessPage text="Error Sending Message" />
 
     } else {
         return <SuccessPage text="No Message Sent!"/>
-    } 
+    }
 
 }

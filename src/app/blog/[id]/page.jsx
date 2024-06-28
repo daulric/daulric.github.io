@@ -1,34 +1,54 @@
 import React from "react";
 
 import Image from "next/image";
+
+
 import { db } from "@/components/items/firebaseapp";
-import { ref, get, getDatabase } from "firebase/database"
+import { get, ref } from "firebase/database";
 
 import LinkCard from "@/components/LinkCard";
 
 import "./style.css"
 
+async function getData() {
+    let data = [];
+
+    let blog_data_ref = ref(db, "/blogs/data")
+    
+    let blog_data = await get(blog_data_ref).then((response) => {
+        return response.val()
+    })
+
+    Object.keys(blog_data).map((item) => {
+        let temp_data = blog_data[item]
+        data.push(temp_data)
+    })
+
+    return data
+}
+
 export default async function BlogIndividual( props ) {
     let { params } = props;
-    let blog_id = params.id
+    let blog_id = Number(params.id)
+    let blog_id_string = String(params.id)
 
-    let blog_ref = ref(db, `/blogs/data`)
+    let items = await getData()
 
-    let response = await get(blog_ref)
+    let blog_item = items.filter((item) => {
+        if (item.blog_id === blog_id || item.blog_id === blog_id_string) {
+            return item;
+        }
+    })
 
-    //console.log(response.val())
-    let itemFound = response.val().filter((item) => item.blog_id === Number(blog_id))
-    let data = itemFound[0];
+    let data = blog_item[0]
 
-    if ( itemFound.length === 0 ) {
+    if (blog_item.length === 0 ) {
         data = {
             title: "Error with Blog",
             content: "Blog not found!"
         }
     }
 
-    console.log(data)
-    
     return (
         <React.Fragment>
 
@@ -61,7 +81,7 @@ export default async function BlogIndividual( props ) {
                 <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
 
                     <LinkCard
-                        link="/posts"
+                        link="/blog"
                         text="Return to Blogs"
                         info="Returns to the blog page to view more blogs!"
                     />
