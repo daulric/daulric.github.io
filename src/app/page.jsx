@@ -2,15 +2,9 @@ import React from "react"
 import Image from "next/image"
 import LinkCard from "@/components/LinkCard"
 
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/react"
-
 export default function AboutMe(){
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
-
-            <Analytics/>
-            <SpeedInsights/>
 
             <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
                 <Image
@@ -23,20 +17,44 @@ export default function AboutMe(){
                 />
             </div>
 
+            <br/>
             <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]" >
                 <p className={`mb-3 text-2xl font-semibold`} >
                     <center> My Name is Ulric</center><br/>
                     Student of the TA Marryshow Community College<br/>
                 </p>
+            </div>
+
+            <br/><br/>
+            <div id="nav"/><br/>
+            <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+
+                <LinkCard
+                    link="/blog"
+                    text="Blogs"
+                    info="Get all Anonymous Blogs created by random users!"
+                />
+
+                <LinkCard 
+                    text="Message"
+                    link="/message"
+                    info="Send a Personal Message"
+                />
+
+                <LinkCard 
+                    text="Pictures"
+                    link="/pictures"
+                    info="View Anonymous Pictures Posted!"
+                />
 
             </div>
 
-            <br/>
+            <br/><br/>
             
+            <div id="socials"/><br/>
             <p className={`mb-3 text-2xl font-semibold`} >
                 Socials<br/>
             </p>
-
 
             <br />
 
@@ -54,18 +72,7 @@ export default function AboutMe(){
                     info="Get up to date with posts!"
                     newTab={true}
                 />
-                
-                <LinkCard
-                    link="/blog"
-                    text="Blogs"
-                    info="Get all Anonymous Blogs created by random users!"
-                />
 
-                <LinkCard 
-                    text="Send Message"
-                    link="/message"
-                    info="Send a Personal Message"
-                />
             </div>
 
             <br/><br/>

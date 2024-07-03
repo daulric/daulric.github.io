@@ -52,9 +52,8 @@ export default async function MsgSuccess(props){
             }
         } catch(e) {
             console.log(e)
+            return <SuccessPage text={`Error Sending Message // ${e.syscall} ${e.code} ${e.port} `} />
         }
-
-        return <SuccessPage text="Error Sending Message" />
 
     } else {
         return <SuccessPage text="No Message Sent!"/>
