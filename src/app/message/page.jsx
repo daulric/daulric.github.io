@@ -1,6 +1,8 @@
 import React from "react"
 import Image from "next/image"
 
+import LinkCard from "@/components/LinkCard"
+
 import "./email.css"
 
 export const metadata = {
@@ -41,9 +43,17 @@ function Email() {
                     <center>
                         <button type="submit" id="submit-btn">Send</button>
                     </center>
-                    
                 </form>
 
+            </div>
+
+            <br/><br/>
+            <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+                <LinkCard
+                    text="Return Home"
+                    link="/"
+                    info="Go Back to the Home Page"
+                />
             </div>
             
         </main>

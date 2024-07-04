@@ -25,12 +25,19 @@ export default async function SuccessPage(props) {
                     {props.text}
                 </h2>
 
-                <LinkCard
-                    text="Return Home"
-                    link="/"
-                    info="Go Back to the Home Page"
-                />
+                <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+                    <LinkCard
+                        text="Return Home"
+                        link="/"
+                        info="Go Back to the Home Page"
+                    />
 
+                    <LinkCard 
+                        text="Send More"
+                        link="/message"
+                        info="Send another message"
+                    />
+                </div>
             </div>
             
         </main>

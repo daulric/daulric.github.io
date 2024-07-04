@@ -2,7 +2,7 @@ import React from "react"
 
 import { createTransport } from "nodemailer"
 
-import SuccessPage from "@/components/SuccessPage"
+import SuccessPage from "./SuccessPage"
 
 import "./success.css"
 
