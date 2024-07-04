@@ -3,7 +3,6 @@ import React from "react";
 import LinkCard from "@/components/LinkCard";
 
 function CreatePolicy({ increment, ...props}) {
-
     return (
         <React.Fragment>
             {`${props.helperText}`}
