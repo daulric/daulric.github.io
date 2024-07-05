@@ -9,6 +9,7 @@
   border: 0;
   transition: 0.2s;
   overflow: hidden;
+  font-weight: bolder;
 }
 
 .btn-warning input[type = "file"]{

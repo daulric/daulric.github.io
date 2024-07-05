@@ -2,11 +2,21 @@ import { getStorage, ref, uploadBytesResumable } from "firebase/storage"
 import UploadButton from "./UploadButton"
 import React from "react"
 
+import Image from "next/image"
+
+import "./UploadButton.css"
+
 import "./page.css"
 
 async function handlePictueUpload(formData) {
     'use server'
-    console.log("uploaded")
+    let data = {}
+
+    for (const [name, value] of formData.entries()) {
+        data[name] = value
+    }
+
+    console.log(data)
 }
 
 export default function UploadPicture() {
@@ -28,16 +38,17 @@ export default function UploadPicture() {
 
                 <br/>
                 <p className={`mb-3 text-2xl font-semibold`} >
-                    <center>Send Message</center>
+                    <center>Upload Image</center>
                 </p>
                 
                 <div >
                 
-                    <form action={handlePictueUpload}>
+                    <form action={handlePictueUpload} >
 
-                        <label htmlFor="name" className="name-label">Name</label> <br/>
-                        <UploadButton />
-
+                        <label htmlFor="name" className="name-label">Select Image</label> <br/>
+                        <input className="btn-warning" type="file" accept="image/*" id="img" name="imgid"/>
+                        <br/>
+                        
                         <label htmlFor="message">Write Description</label><br/>
                         <textarea className={`mb-3 text-2xl font-semibold`} id="message-label" name="description" type="text" required />
 

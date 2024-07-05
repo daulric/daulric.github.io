@@ -11,6 +11,7 @@ export const metadata = {
 }
 
 async function setData(formData) {
+    console.log(formData)
     const {title, content} = Object.fromEntries(formData)
 
     let currentId_ref = ref(db, "/blogs/currentId")
