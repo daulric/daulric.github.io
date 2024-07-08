@@ -34,37 +34,7 @@ async function handlePictueUpload(formData) {
 
             console.log("Uploading", data.imgid.name, percent, "%")
         }, (e) => console.log(e), async () => {
-            getDownloadURL(uploadTask.snapshot.ref).then( async (url) => {
-
-                let current_id_ref = databaseRef(firebaseDB, "/pictures/currentId")
-                let database_pic_ref = databaseRef(firebaseDB, "/pictures/data")
-        
-                let current_id = await get(current_id_ref).then((snapshot) => {
-                    let temp_id = snapshot.val()
-        
-                    if (temp_id === null) return 0;
-                    return Number(temp_id);
-                })
-        
-                let currentDate = new Date()
-        
-                let dateFormat =  {
-                    date: currentDate.getDate(),
-                    month: currentDate.getMonth() + 1,
-                    yr: currentDate.getFullYear()
-                }
-        
-                let new_id = current_id + 1
-                await push(database_pic_ref, {
-                    pic_id: new_id,
-                    pic_url: url,
-                    description: data.description,
-                    timeUploaded: dateFormat
-                }).then(() => {
-                    set(current_id_ref, new_id)
-                })
-        
-            }).then(() => resolve())
+            resolve()
         })
     }).then(() => redirect("/pictures"))
 
@@ -104,9 +74,6 @@ export default function UploadPicture() {
                         <label htmlFor="name" className="name-label">Select Image</label> <br/>
                         <input className="btn-warning" type="file" accept="image/*" id="img" name="imgid"/>
                         <br/>
-                        
-                        <label htmlFor="message">Write Description</label><br/>
-                        <textarea className={`mb-3 text-2xl font-semibold`} id="message-label" name="description" type="text" required />
 
                         <br/> <br/>
                         <center>

@@ -79,7 +79,7 @@ export default async function Pictures() {
           <h3>Uploaded Pictures!</h3>
           <br/><br/>
           <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-              <LinkCard text="Upload Pictures" info="Upload Anonymous Pictues" link="/pictures/upload" />
+              <LinkCard text="Upload Picture" info="Upload Anonymous Pictues" link="/pictures/upload" />
               <LinkCard text="Home" info="Return to the Home Page" link="/" />
           </div>
           <br/>
