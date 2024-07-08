@@ -1,5 +1,3 @@
-
-
 .img-gallery {
     width: 80%;
     margin: 100px auto 50px;
@@ -17,6 +15,10 @@
     transform: scale(0.8);
     border-radius: 10px;
     box-shadow: 0 32px 75px rgba(60, 77, 136, 0.2);
+}
+
+.img-gallery span { /* Adjust this value to control space between image and text */
+    text-align: center;
 }
 
 .full-img {
@@ -43,4 +45,31 @@
     font-size: 30px;
     color: #fff;
     cursor: pointer;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading h3 {
+    font-size: 2.4rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#pitcures-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+#image-loaded {
+    border-radius: 1%;
 }

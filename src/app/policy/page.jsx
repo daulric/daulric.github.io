@@ -2,6 +2,10 @@ import React from "react";
 
 import LinkCard from "@/components/LinkCard";
 
+export const metadata = {
+    title: "Policy"
+}
+
 function CreatePolicy({ increment, ...props}) {
     return (
         <React.Fragment>
@@ -10,7 +14,6 @@ function CreatePolicy({ increment, ...props}) {
         </React.Fragment>
     )
 }
-
 
 export default function Policy() {
   

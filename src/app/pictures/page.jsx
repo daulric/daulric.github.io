@@ -1,59 +1,97 @@
-"use client"
+import React from "react";
+import Image from "next/image";
 
-import React, { useState, useEffect } from "react";
-import "./style.css";
+import LinkCard from "@/components/LinkCard";
 
-import Image from "next/image"
+import { unstable_noStore as noStore } from "next/cache";
 
-export default function Pictures() {
+import { get, ref } from "firebase/database";
+import { db } from "@/components/items/firebaseapp";
 
-    const [fullImgSrc, setFullImgSrc] = useState(null);
+import "./style.css"
 
-    useEffect(() => {
-        const fullImgBox = document.getElementById("fullImgBox");
-        const fullImg = document.getElementById("fullImg");
+export const metadata = {
+  title: "Pictures"
+}
 
-        if (fullImgBox && fullImg) {
-            if (fullImgSrc) {
-                fullImgBox.style.display = "flex";
-                fullImg.src = fullImgSrc;
-            } else {
-                fullImgBox.style.display = "none";
-            }
-        }
-    }, [fullImgSrc]);
+function ImageAdd(props) {
+  return (
+    <React.Fragment>
+      <Image
+        id="image-loaded"
+        src={props.src}
+        alt={props.alt}
+        priority
+        height={1000}
+        width={1000}
+      />
+    </React.Fragment>
+    
+  );
+}
 
-    function openFullImg(pic) {
-        setFullImgSrc(pic);
-    }
+async function GetImages() {
+  const data = [];
 
-    function closeFullImg() {
-        setFullImgSrc(null);
-    }
+  let get_ref = ref(db, "/pictures/data")
 
-    function ImageAdd(props) {
-        return <Image
-            src={props.src} 
-            onClick={() => openFullImg(props.src)} 
-            alt="Thumbnail"
-            width={1000}
-            height={1000}
-            priority
-        />;
-    }
+  let temp_data = await get(get_ref).then((res) => res.val())
+  
+  Object.keys(temp_data).map((key) => {
+    let t_data = temp_data[key];
+    data.push(t_data);
+  })
 
-    return (
-        <React.Fragment>
-            <div className="full-img" id="fullImgBox" style={{ display: 'none' }}>
-                <Image id="fullImg" alt="Full size" />
-                <span onClick={closeFullImg}>X</span>
-            </div>
+  data.sort((a, b) => {
+    return b.pic_id - a.pic_id;
+  })
 
-            <div className="img-gallery">
-                { /* Pictures Coming Here!  */ }
-                <ImageAdd src="/logo.png" />
-                <ImageAdd src="/avatar.png"/>
-            </div>
-        </React.Fragment>
-    );
+  return data;
+}
+
+export default async function Pictures() {
+  noStore()
+  let imageData = await GetImages()
+
+  return (
+      <section id="pitcures-heading">
+        <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
+          <Image
+          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70]"
+          src="/logo.png"
+          alt="Logo"
+          width={180}
+          height={37}
+          priority
+          />
+        </div>
+
+      <div className="heading">
+          <h3>Recent Uploaded Pictures!</h3>
+          <br/><br/>
+          <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+              <LinkCard text="Upload Pictures" info="Upload Anonymous Pictues" link="/pictures/upload" />
+              <LinkCard text="Home" info="Return to the Home Page" link="/" />
+          </div>
+          <br/>
+          <br/>
+          <div className="img-gallery">
+            {imageData.map((image) => {
+
+              return (
+                <React.Fragment>
+                  <ImageAdd
+                    key={`Img_ID: ${image.pic_id}`} 
+                    src={image.pic_url}
+                    alt={image.description}
+                    priority 
+                  />
+                </React.Fragment>
+              )
+            })}
+          </div>
+          
+      </div>
+      </section>
+  );
 }
