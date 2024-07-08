@@ -26,6 +26,7 @@ async function getData () {
         data.push(temp_data)
     })
 
+    data.sort((a, b) => (b.blog_id - a.blog_id)) // Sorts in descending order to get the recent blogs posted!
     return data;
 
 }
@@ -85,7 +86,7 @@ export default async function BlogLandingPage() {
                 </div>
 
                 <div className="blog-heading">
-                    <h3>Anonymous Blogs</h3>
+                    <h3>Recent Anonymous Blogs</h3>
                     <br/><br/>
                     <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
                         <LinkCard text="Create Blog" info="Create an Anonymous Blog" link="/blog/create" />

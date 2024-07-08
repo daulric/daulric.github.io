@@ -1,6 +1,9 @@
-import { getStorage, ref, uploadBytesResumable } from "firebase/storage"
+import {ref ,getDownloadURL, getStorage, uploadBytesResumable } from "firebase/storage"
+import { set, ref as databaseRef, push, get } from "firebase/database"
 import UploadButton from "./UploadButton"
 import React from "react"
+
+import { storage as storeMap, app, db as firebaseDB } from "@/components/items/firebaseapp"
 
 import Image from "next/image"
 
@@ -16,7 +19,50 @@ async function handlePictueUpload(formData) {
         data[name] = value
     }
 
-    console.log(data)
+    let storage_ref = ref(storeMap, `/pictures/${data.imgid.name}`)
+    let uploadTask = uploadBytesResumable(storage_ref, data.imgid)
+
+    uploadTask.on("state_changed", (snapshot) => {
+        const percent = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+
+        console.log("Uploading", data.imgid.name, percent, "%")
+    }, (e) => console.log(e), async () => {
+        getDownloadURL(uploadTask.snapshot.ref).then( async (url) => {
+
+            // Ref Data || Error Here
+            let current_id_ref = databaseRef(firebaseDB, "/pictures/currentId")
+            let database_pic_ref = databaseRef(firebaseDB, "/pictures/data")
+
+            let current_id = await get(current_id_ref).then((snapshot) => {
+                let temp_id = snapshot.val()
+
+                if (temp_id === null) return 0;
+                return Number(temp_id);
+            })
+
+            let currentDate = new Date()
+
+            let dateFormat =  {
+                date: currentDate.getDate(),
+                month: currentDate.getMonth() + 1,
+                yr: currentDate.getFullYear()
+            }
+
+            let new_id = current_id + 1
+            await push(database_pic_ref, {
+                pic_id: new_id,
+                pic_url: url,
+                description: data.description,
+                timeUploaded: dateFormat
+            }).then(() => {
+                set(current_id_ref, new_id)
+            })
+
+        })
+    })
+
 }
 
 export default function UploadPicture() {
