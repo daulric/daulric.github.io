@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app"
 import { getDatabase } from "firebase/database"
 import { getStorage } from "firebase/storage"
 
-const app = initializeApp({
+const firebaseConfig = {
     apiKey: process.env.apiKey,
     authDomain: process.env.authDomain,
     projectId: process.env.projectId,
@@ -10,9 +10,11 @@ const app = initializeApp({
     messagingSenderId: process.env.messagingSenderId,
     appId: process.env.appId,
     measurementId: process.env.measurementId,
-})
+    databaseURL: process.env.databaseURL,
+}
+const app = initializeApp(firebaseConfig)
 
 const db = getDatabase(app)
 const storage = getStorage(app)
 
-export { db, storage, app}
+export { db, storage, app, firebaseConfig as FireData}
