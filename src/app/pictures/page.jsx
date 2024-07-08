@@ -18,6 +18,7 @@ function ImageAdd(props) {
   return (
     <React.Fragment>
       <Image
+        key={props.key}
         id="image-loaded"
         src={props.src}
         alt={props.alt}
@@ -79,14 +80,12 @@ export default async function Pictures() {
             {imageData.map((image) => {
 
               return (
-                <React.Fragment>
-                  <ImageAdd
-                    key={`Img_ID: ${image.pic_id}`} 
-                    src={image.pic_url}
-                    alt={image.description}
-                    priority 
-                  />
-                </React.Fragment>
+                <ImageAdd
+                  key={`Img_ID: ${image.pic_id}`} 
+                  src={image.pic_url}
+                  alt={image.description}
+                  priority 
+                />
               )
             })}
           </div>
