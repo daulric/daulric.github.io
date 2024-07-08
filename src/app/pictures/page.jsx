@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 
+import Image from "next/image"
+
 export default function Pictures() {
 
     const [fullImgSrc, setFullImgSrc] = useState(null);
@@ -30,18 +32,27 @@ export default function Pictures() {
     }
 
     function ImageAdd(props) {
-        return <img src={props.src} onClick={() => openFullImg(props.src)} alt="Thumbnail" />;
+        return <Image
+            src={props.src} 
+            onClick={() => openFullImg(props.src)} 
+            alt="Thumbnail"
+            width={1000}
+            height={1000}
+            priority
+        />;
     }
 
     return (
         <React.Fragment>
             <div className="full-img" id="fullImgBox" style={{ display: 'none' }}>
-                <img id="fullImg" alt="Full size" />
+                <Image id="fullImg" alt="Full size" />
                 <span onClick={closeFullImg}>X</span>
             </div>
 
             <div className="img-gallery">
                 { /* Pictures Coming Here!  */ }
+                <ImageAdd src="/logo.png" />
+                <ImageAdd src="/avatar.png"/>
             </div>
         </React.Fragment>
     );
