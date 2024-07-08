@@ -6,7 +6,8 @@ import LinkCard from "@/components/LinkCard";
 import { unstable_noStore as noStore } from "next/cache";
 
 import { get, ref } from "firebase/database";
-import { db } from "@/components/items/firebaseapp";
+import { getDownloadURL, listAll, ref as storeRef } from "firebase/storage"
+import { db, storage } from "@/components/items/firebaseapp";
 
 import "./style.css"
 
@@ -18,7 +19,6 @@ function ImageAdd(props) {
   return (
     <React.Fragment>
       <Image
-        key={props.key}
         id="image-loaded"
         src={props.src}
         alt={props.alt}
@@ -31,28 +31,36 @@ function ImageAdd(props) {
   );
 }
 
-async function GetImages() {
-  const data = [];
+async function GetImagesStraight() {
+  noStore()
+  let db_ref = storeRef(storage, "/pictures");
 
-  let get_ref = ref(db, "/pictures/data")
+  try {
+    let result = await listAll(db_ref);
+    
+    const data = [];
 
-  let temp_data = await get(get_ref).then((res) => res.val())
-  
-  Object.keys(temp_data).map((key) => {
-    let t_data = temp_data[key];
-    data.push(t_data);
-  })
+    // Use Promise.all to wait for all getDownloadURL promises to resolve
+    await Promise.all(result.items.map(async (item) => {
+      try {
+        const downloadURL = await getDownloadURL(item);
+        data.push(downloadURL);
+      } catch (error) {
+        console.error(`Error getting URL for item: ${item.name}`, error);
+      }
+    }));
 
-  data.sort((a, b) => {
-    return b.pic_id - a.pic_id;
-  })
-
-  return data;
+    return data;
+  } catch(err) {
+    console.log("Error in GetImagesStraight:", err);
+    return [];
+  }
 }
 
 export default async function Pictures() {
   noStore()
-  let imageData = await GetImages()
+
+  let imageData = await GetImagesStraight()
 
   return (
       <section id="pitcures-heading">
@@ -68,7 +76,7 @@ export default async function Pictures() {
         </div>
 
       <div className="heading">
-          <h3>Recent Uploaded Pictures!</h3>
+          <h3>Uploaded Pictures!</h3>
           <br/><br/>
           <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
               <LinkCard text="Upload Pictures" info="Upload Anonymous Pictues" link="/pictures/upload" />
@@ -78,12 +86,11 @@ export default async function Pictures() {
           <br/>
           <div className="img-gallery">
             {imageData.map((image) => {
-
               return (
                 <ImageAdd
-                  key={`Img_ID: ${image.pic_id}`} 
-                  src={image.pic_url}
-                  alt={image.description}
+                  key={`Img_ID: ${image}`} 
+                  src={image}
+                  alt={"idk"}
                   priority 
                 />
               )
