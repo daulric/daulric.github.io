@@ -57,6 +57,36 @@ async function GetImagesStraight() {
   }
 }
 
+async function handlePics() {
+  noStore()
+  let imageData = await GetImagesStraight()
+
+  if (imageData === null || typeof imageData === "undefined") {
+    return <React.Fragment />
+  }
+
+  if (imageData.length === 0) {
+    return <React.Fragment />
+  }
+
+  return (
+    <React.Fragment >
+      {imageData.map((image) => {
+        return (
+          <ImageAdd
+            key={`Img_ID: ${image}`} 
+            src={image}
+            alt={"idk"}
+            priority 
+          />
+        )
+      })}
+    </React.Fragment>
+  )
+
+
+}
+
 export default async function Pictures() {
   noStore()
 
@@ -85,16 +115,7 @@ export default async function Pictures() {
           <br/>
           <br/>
           <div className="img-gallery">
-            {imageData.map((image) => {
-              return (
-                <ImageAdd
-                  key={`Img_ID: ${image}`} 
-                  src={image}
-                  alt={"idk"}
-                  priority 
-                />
-              )
-            })}
+            {handlePics()}
           </div>
           
       </div>

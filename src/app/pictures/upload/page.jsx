@@ -72,12 +72,12 @@ export default function UploadPicture() {
                     <form action={RedirectToPictures} >
 
                         <label htmlFor="name" className="name-label">Select Image</label> <br/>
-                        <input className="btn-warning" type="file" accept="image/*" id="img" name="imgid"/>
+                        <input className="btn-warning" type="file" accept="image/*" id="img" name="imgid" required/>
                         <br/>
 
                         <br/> <br/>
                         <center>
-                            <button type="submit" id="submit-btn">Send</button>
+                            <button type="submit" id="submit-btn">Upload</button>
                         </center>
                         
                     </form>

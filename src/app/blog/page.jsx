@@ -45,7 +45,6 @@ async function handleBlogs() {
     }
 
     return (
-
         <React.Fragment>
             { 
                 items.map((item) => {

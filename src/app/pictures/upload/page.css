@@ -13,9 +13,18 @@ label {
     font-size: 16px;
     border-radius: 10px;
     cursor: pointer;
+    font-weight: bolder;
+    font-size: large;
 }
 
-#name-label, #email-label, #message-label {
-    color: #323433;
+#submit-btn :hover {
+    color: black;
+    background-color: white;
+}
+
+.name-label {
+    color: #ffffff;
     border-radius: 5px;
+    font-size: large;
+    font-weight: bold;
 }
