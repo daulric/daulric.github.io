@@ -1,5 +1,4 @@
-import {ref ,getDownloadURL, uploadBytesResumable } from "firebase/storage"
-import { set, ref as databaseRef, push, get } from "firebase/database"
+import {ref , uploadBytesResumable } from "firebase/storage"
 import React from "react"
 
 import { redirect } from "next/navigation"
@@ -11,8 +10,6 @@ export const metadata = {
 import { storage as storeMap, app, db as firebaseDB } from "@/components/items/firebaseapp"
 
 import Image from "next/image"
-
-import "./UploadButton.css"
 
 import "./page.css"
 

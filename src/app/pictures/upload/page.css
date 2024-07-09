@@ -15,11 +15,13 @@ label {
     cursor: pointer;
     font-weight: bolder;
     font-size: large;
+    transform: scale(1);
 }
 
 #submit-btn :hover {
     color: black;
     background-color: white;
+    transform: scale(0.8);
 }
 
 .name-label {
@@ -27,4 +29,44 @@ label {
     border-radius: 5px;
     font-size: large;
     font-weight: bold;
+    transform: scale(1);
+}
+
+.btn-warning {
+    position: relative;
+    padding: 11px 16px;
+    font-size: 15px;
+    line-height: 1.5;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #3f3f3f;
+    border: 0;
+    transition: 0.2s;
+    overflow: hidden;
+    font-weight: bolder;
+    transform: scale(0.9);
+    margin: auto;
+}
+
+.btn-warning:hover {
+    transform: scale(0.8);
+}
+
+.btn-warning input[type = "file"]{
+    cursor: pointer;
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    transform: scale(3);
+    opacity: 0;
+
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-warning:hover{
+    background-color: #ffffff;
+    color: #292929;
 }
