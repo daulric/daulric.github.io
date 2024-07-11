@@ -5,9 +5,8 @@ import LinkCard from "@/components/LinkCard";
 
 import { unstable_noStore as noStore } from "next/cache";
 
-import { get, ref } from "firebase/database";
-import { getDownloadURL, listAll, ref as storeRef } from "firebase/storage"
-import { db, storage } from "@/components/items/firebaseapp";
+import { getDownloadURL, getMetadata, listAll, ref as storeRef } from "firebase/storage"
+import { storage } from "@/components/items/firebaseapp";
 
 import "./style.css"
 
@@ -44,11 +43,20 @@ async function GetImagesStraight() {
     await Promise.all(result.items.map(async (item) => {
       try {
         const downloadURL = await getDownloadURL(item);
-        data.push(downloadURL);
+        const metaData = await getMetadata(item);
+        data.push({
+          url: downloadURL,
+          data: metaData,
+        });
+
       } catch (error) {
         console.error(`Error getting URL for item: ${item.name}`, error);
       }
     }));
+
+    data.sort((a, b) => {
+      return b.data.generation - a.data.generation
+    })
 
     return data;
   } catch(err) {
@@ -74,8 +82,8 @@ async function handlePics() {
       {imageData.map((image) => {
         return (
           <ImageAdd
-            key={`Img_ID: ${image}`} 
-            src={image}
+            key={`Img_ID: ${image.url}`} 
+            src={image.url}
             alt={"idk"}
             priority 
           />
@@ -89,8 +97,6 @@ async function handlePics() {
 
 export default async function Pictures() {
   noStore()
-
-  let imageData = await GetImagesStraight()
 
   return (
       <section id="pitcures-heading">
@@ -106,7 +112,7 @@ export default async function Pictures() {
         </div>
 
       <div className="heading">
-          <h3>Uploaded Pictures!</h3>
+          <h3>Recent Uploaded Pictures!</h3>
           <br/><br/>
           <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
               <LinkCard text="Upload Picture" info="Upload Anonymous Pictues" link="/pictures/upload" />
