@@ -4,6 +4,34 @@ import LinkCard from "@/components/LinkCard"
 
 import "./style.css"
 
+const nav_list = [
+    {
+        link: "/blog",
+        text: "Blogs",
+        info:"Get all Anonymous Blogs created by random users!"
+    },
+
+    {
+        text: "Message",
+        link: "/message",
+        info: "Send a Personal Message"
+    },
+
+    {
+        text:"Pictures",
+        link:"/pictures",
+        info:"View Anonymous Pictures Posted!"
+    },
+
+    {
+        text: "Policy",
+        link: "/policy",
+        info: "View Website Policy"
+    }
+
+
+]
+
 export default function AboutMe(){
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -22,29 +50,15 @@ export default function AboutMe(){
             <div id="nav"/><br/>
             <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
 
-                <LinkCard
-                    link="/blog"
-                    text="Blogs"
-                    info="Get all Anonymous Blogs created by random users!"
-                />
+                {
+                    nav_list.map((props) => {
+                        return LinkCard({
+                            key: props.text,
+                            ...props,
+                        })
+                    })
 
-                <LinkCard 
-                    text="Message"
-                    link="/message"
-                    info="Send a Personal Message"
-                />
-
-                <LinkCard 
-                    text="Pictures"
-                    link="/pictures"
-                    info="View Anonymous Pictures Posted!"
-                />
-
-                <LinkCard 
-                    text="Policy"
-                    link="/policy"
-                    info="View Website Policy"
-                />
+                }
 
             </div>
 
