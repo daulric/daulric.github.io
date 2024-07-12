@@ -2,7 +2,12 @@
 const nextConfig = {
     staticPageGenerationTimeout: 120,
     images: {
-        domains: ['firebasestorage.googleapis.com'],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "firebasestorage.googleapis.com"
+            }
+        ],
     },
 };
 
