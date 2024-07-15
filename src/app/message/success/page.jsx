@@ -28,7 +28,7 @@ export default async function MsgSuccess(props){
     )
 
     if (typeCheck) {
-        await sendDiscordMessage(name, message).then(() => {
+        return await sendDiscordMessage(name, message).then(() => {
             return <SuccessPage text="Message Sent!"/>
         }).catch((e) => {
             return <SuccessPage text="Error Sending Message!"/>
