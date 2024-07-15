@@ -1,6 +1,5 @@
 import React from "react"
 
-import { createTransport } from "nodemailer"
 import { sendDiscordMessage } from "@/components/items/discordhook"
 
 import SuccessPage from "./SuccessPage"
@@ -29,33 +28,11 @@ export default async function MsgSuccess(props){
     )
 
     if (typeCheck) {
-        await sendDiscordMessage(name, message)
-        let transporter = createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.STMP_MAIL,
-                pass: process.env.STMP_PASS
-            }
+        await sendDiscordMessage(name, message).then(() => {
+            return <SuccessPage text="Message Sent!"/>
+        }).catch((e) => {
+            return <SuccessPage text="Error Sending Message!"/>
         })
-
-        try {
-            let response = await transporter.verify().then(() => {
-                return transporter.sendMail({
-                    to: process.env.STMP_MAIL,
-                    subject: `Message Sent From ${name}`,
-                    text: message,
-                }).then((response) => {
-                    return response.messageId
-                })
-            })
-
-            if (response) {
-                return <SuccessPage text="Message Sent!"/>
-            }
-        } catch(e) {
-            console.log(e)
-            return <SuccessPage text={`Error Sending Message // ${e.syscall} ${e.code} ${e.port} `} />
-        }
 
     } else {
         return <SuccessPage text="No Message Sent!"/>
