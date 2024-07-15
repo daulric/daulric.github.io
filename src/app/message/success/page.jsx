@@ -1,6 +1,7 @@
 import React from "react"
 
 import { createTransport } from "nodemailer"
+import { sendDiscordMessage } from "@/components/items/discordhook"
 
 import SuccessPage from "./SuccessPage"
 
@@ -28,6 +29,7 @@ export default async function MsgSuccess(props){
     )
 
     if (typeCheck) {
+        await sendDiscordMessage(name, message)
         let transporter = createTransport({
             service: "gmail",
             auth: {
