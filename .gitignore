@@ -39,7 +39,9 @@ yarn-error.log*
 next-env.d.ts
 secrets.txt
 
-/project/public/swe-worker-development.js
-/project/public/sw.js.map
-/project/public/swe-worker-5c72df51bb1f6ee0.js
-/project/public/workbox-7144475a.js.map
+/public/swe-worker-development.js
+/public/sw.js.map
+/public/swe-worker-5c72df51bb1f6ee0.js
+/public/workbox-7144475a.js.map
+/public/*workbox*.js
+/public/sw.js
