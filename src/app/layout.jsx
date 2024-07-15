@@ -7,8 +7,11 @@ export const metadata = {
   title: "daulric",
   description: "About Ulric",
   icons: {
+    apple: "/logo.png",
     icon: "/logo.png"
-  }
+  },
+
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }) {
