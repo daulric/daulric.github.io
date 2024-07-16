@@ -6,15 +6,15 @@ import "./style.css"
 
 const nav_list = [
     {
-        link: "/blog",
-        text: "Blogs",
-        info:"Get all Anonymous Blogs created by random users!"
-    },
-
-    {
         text: "Message",
         link: "/message",
         info: "Send a Personal Message"
+    },
+
+    {
+        link: "/blog",
+        text: "Blogs",
+        info:"Get all Anonymous Blogs created by random users!"
     },
 
     {
@@ -27,8 +27,7 @@ const nav_list = [
         text: "Policy",
         link: "/policy",
         info: "View Website Policy"
-    }
-
+    },
 
 ]
 
