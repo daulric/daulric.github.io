@@ -48,3 +48,8 @@ body{
     margin: 20px 0px;
     flex-wrap: wrap;
 }
+
+.line {
+    border-top: 1px solid black;
+    width: 100%;
+}
