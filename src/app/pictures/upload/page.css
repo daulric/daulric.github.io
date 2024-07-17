@@ -48,12 +48,8 @@ label {
     margin: auto;
 }
 
-.btn-warning:active {
+.btn-warning:hover {
     transform: scale(0.8);
-}
-
-.btn-warning:not(:active) {
-    transform: scale(0);
 }
 
 .btn-warning input[type = "file"] {
