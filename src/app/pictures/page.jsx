@@ -8,26 +8,12 @@ import { unstable_noStore as noStore } from "next/cache";
 import { getDownloadURL, getMetadata, listAll, ref as storeRef } from "firebase/storage"
 import { storage } from "@/components/items/firebaseapp";
 
+import ImageViewer from "./ImageViewer";
+
 import "./style.css"
 
 export const metadata = {
   title: "Pictures"
-}
-
-function ImageAdd(props) {
-  return (
-    <React.Fragment>
-      <Image
-        id="image-loaded"
-        src={props.src}
-        alt={props.alt}
-        priority
-        height={1000}
-        width={1000}
-      />
-    </React.Fragment>
-    
-  );
 }
 
 async function GetImagesStraight() {
@@ -80,12 +66,12 @@ async function handlePics() {
   return (
     <React.Fragment >
       {imageData.map((image) => {
+
         return (
-          <ImageAdd
-            key={`Img_ID: ${image.url}`} 
+          <ImageViewer 
+            key={`Img_ID: ${image.url}`}
             src={image.url}
-            alt={"idk"}
-            priority 
+            alt={image.data.name || "Uploaded Image"}
           />
         )
       })}
