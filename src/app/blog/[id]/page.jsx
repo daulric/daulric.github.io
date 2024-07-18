@@ -87,7 +87,7 @@ export default async function BlogIndividual( props ) {
                     />
 
                     <LinkCard
-                        link="/home"
+                        link="/"
                         text="Return Home"
                         info="Returns to the home page"
                     />
