@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import LinkCard from "@/components/LinkCard"
+import AuthText from "@/components/Auth/AuthText"
 
 import "./style.css"
 
@@ -46,15 +47,18 @@ export default function AboutMe(){
                 />
             </div>
 
+            <AuthText />
+            
+
             <div id="nav"/><br/>
             <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
 
                 {
                     nav_list.map((props) => {
-                        return LinkCard({
-                            key: props.text,
-                            ...props,
-                        })
+                        return <LinkCard
+                            key={props.text} 
+                            {...props}
+                        />
                     })
 
                 }

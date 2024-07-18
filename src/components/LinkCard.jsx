@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 
 export default function LinkCard(props) {
@@ -9,6 +10,10 @@ export default function LinkCard(props) {
         _target = "_self"
     }
 
+    if (props.clicked === null) {
+        props.clicked = () => {}
+    }
+
     return (
         <Link
             href={props.link}
@@ -16,6 +21,7 @@ export default function LinkCard(props) {
             target={_target}
             rel="noopener noreferrer"
             key={props.key}
+            onClick={props.clicked}
         >
             <h2 className={`mb-3 text-2xl font-semibold`}>
                 {props.text} {" "}
