@@ -13,7 +13,6 @@ next.config.js
 
 # next.js
 /.next/
-/out/
 
 # production
 /build
