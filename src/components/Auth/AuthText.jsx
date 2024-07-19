@@ -42,18 +42,18 @@ export default function ProfileSession() {
                 />
             </>
         )
-    } else {
-        return (
-            <>
-                <ImageCrate image="/logo.png"/>
-                <LinkCard 
-                    text="Sign In"
-                    info="Sign in of the Site!"
-                    clicked={ () => signIn()}
-                    link="/"
-                />
-            </>
-        )
     }
+
+    return (
+        <>
+            <ImageCrate image="/logo.png"/>
+            <LinkCard 
+                text="Sign In"
+                info="Sign in of the Site!"
+                clicked={ () => signIn()}
+                link="/"
+            />
+        </>
+    )
 
 } 
